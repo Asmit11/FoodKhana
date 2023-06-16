@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "655847300768",
+    "project_id": "foodkhana-b31f2",
+    "storage_bucket": "foodkhana-b31f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655847300768:android:f66b1335da6bf0ded773c5",
+        "android_client_info": {
+          "package_name": "com.example.foodkhana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655847300768-p7oih3nijv9njmt864po371bpnc4e2on.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKMMOnbaU57W84NeCBBQJs_-S86M6feI4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "655847300768-p7oih3nijv9njmt864po371bpnc4e2on.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

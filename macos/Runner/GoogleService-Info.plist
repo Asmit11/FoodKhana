@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>655847300768-ltr5dm0mot1ij1ngsb5tqleff16s99dg.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.655847300768-ltr5dm0mot1ij1ngsb5tqleff16s99dg</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAkN3aUYKHbwOvBTorAmdCR7OGjMVRsILg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>655847300768</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.foodkhana.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>foodkhana-b31f2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>foodkhana-b31f2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:655847300768:ios:3f6681e5a1e41db6d773c5</string>
+</dict>
+</plist>
