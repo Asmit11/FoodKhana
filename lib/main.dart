@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // import 'DashboardScreen.dart';
 // import 'ForgetScreen.dart';
 // import 'LoginScreen.dart';
+import 'BillingScreen.dart';
 import 'RegisterScreen.dart';
 
 import 'firebase_options.dart';
@@ -27,12 +28,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: "/register",
+      initialRoute: "/billing",
       routes: {
         // "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
         // "/forget-password": (context) => ForgetScreen(),
         // "/dasboard": (context) => DashBoardScreen(),
+        "/billing": (context) => BillingScreen(products: []),
       },
     );
   }
