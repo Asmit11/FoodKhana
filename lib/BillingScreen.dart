@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class Product {
@@ -27,6 +26,19 @@ class BillingScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Billing'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OrderStatusPage(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -54,7 +66,7 @@ class BillingScreen extends StatelessWidget {
                             products[index].name,
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(height: 8), // Updated SizedBox height
+                          SizedBox(height: 8),
                           Text(
                             'Price: \$${products[index].price.toStringAsFixed(2)} | Quantity: ${products[index].quantity}',
                             style: TextStyle(fontSize: 16),
@@ -83,6 +95,23 @@ class BillingScreen extends StatelessWidget {
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class OrderStatusPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Order Status'),
+      ),
+      body: Center(
+        child: Text(
+          'Order Status Page',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
     );

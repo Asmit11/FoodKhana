@@ -34,7 +34,10 @@ class MyApp extends StatelessWidget {
         "/register": (context) => RegisterScreen(),
         // "/forget-password": (context) => ForgetScreen(),
         // "/dasboard": (context) => DashBoardScreen(),
+        "/orderstatus": (context) => OrderStatusPage(),
         "/billing": (context) => BillingScreen(products: []),
+
+
       },
     );
   }
