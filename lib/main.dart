@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:foodkhana/DashBoardScreen.dart';
+import 'package:foodkhana/viewmodels/product_viewmodel.dart';
+import 'package:provider/provider.dart';
 
-// import 'DashboardScreen.dart';
+// import 'DashBoardScreen.dart';
 // import 'ForgetScreen.dart';
 // import 'LoginScreen.dart';
 import 'BillingScreen.dart';
@@ -23,19 +26,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+        providers: [
+        ChangeNotifierProvider(create: (_)=>ProductViewModel())
+    ],
+    child: MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: "/billing",
+      initialRoute: "/dashboard",
       routes: {
         // "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
         // "/forget-password": (context) => ForgetScreen(),
-        // "/dasboard": (context) => DashBoardScreen(),
+        "/dashboard": (context) => DashBoardScreen(),
         "/billing": (context) => BillingScreen(products: []),
       },
+    ),
     );
   }
 }
