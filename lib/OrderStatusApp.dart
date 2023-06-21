@@ -10,7 +10,7 @@ class OrderStatusApp extends StatelessWidget {
     return MaterialApp(
       title: 'Order Status',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: OrderStatusPage(),
     );
@@ -34,6 +34,14 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Order Status'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: orders.length,

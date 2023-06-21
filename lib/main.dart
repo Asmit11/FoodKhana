@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ), //m
-      initialRoute: "/orderstatus",
+      initialRoute: "/billing",
       routes: {
         // "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
