@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:foodkhana/DashBoardScreen.dart';
+import 'package:foodkhana/ForgetScreen.dart';
+import 'package:foodkhana/LoginScreen.dart';
 import 'package:foodkhana/OrderStatusApp.dart';
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -36,14 +38,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ), //m
-      initialRoute: "/billing",
+      initialRoute: "/login",
       routes: {
-        // "/login": (context) => LoginScreen(),
+        "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
-        // "/forget-password": (context) => ForgetScreen(),
+        "/forget-password": (context) => ForgetScreen(),
         "/dashboard": (context) => DashBoardScreen(),
         "/orderstatus": (context) => OrderStatusApp(),
-        "/billing": (context) => BillingScreen(products: []),
+        "/billing": (context) => BillingScreen(),
       },
     ),
     );
