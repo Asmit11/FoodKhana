@@ -320,18 +320,18 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     });
   }
 
-  void signOut() async {
-    try {
-      await _auth.signOut();
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Logged Out")));
-    } on FirebaseAuthException catch (err) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(err.message.toString()),
-        backgroundColor: Colors.red,
-      ));
-    }
-  }
+  // void signOut() async {
+  //   try {
+  //     await _auth.signOut();
+  //     ScaffoldMessenger.of(context)
+  //         .showSnackBar(SnackBar(content: Text("Logged Out")));
+  //   } on FirebaseAuthException catch (err) {
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //       content: Text(err.message.toString()),
+  //       backgroundColor: Colors.red,
+  //     ));
+  //   }
+  // }
 
   Future<void> deleteProduct(String id) async {
     try {
@@ -400,30 +400,30 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               ),
             ),
             actions: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xffD64D55),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed("/login");
-                  signOut();
-                },
-                child: Icon(Icons.exit_to_app),
-              ),
-              CircleAvatar(
-                radius: 18,
-                backgroundColor: Color(0xffD64D55),
-                child: Icon(Icons.search, size: 20, color: Colors.white),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: CircleAvatar(
-                  radius: 18,
-                  backgroundColor: Color(0xffD27076),
-                  backgroundImage: NetworkImage(
-                      'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'),
-                ),
-              ),
+              // ElevatedButton(
+              //   style: ElevatedButton.styleFrom(
+              //     backgroundColor: Color(0xffD64D55),
+              //   ),
+              //   onPressed: () {
+              //     Navigator.of(context).pushNamed("/login");
+              //     signOut();
+              //   },
+              //   child: Icon(Icons.exit_to_app),
+              // ),
+              // CircleAvatar(
+              //   radius: 18,
+              //   backgroundColor: Color(0xffD64D55),
+              //   child: Icon(Icons.search, size: 20, color: Colors.white),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 5),
+              //   child: CircleAvatar(
+              //     radius: 18,
+              //     backgroundColor: Color(0xffD27076),
+              //     backgroundImage: NetworkImage(
+              //         'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'),
+              //   ),
+              // ),
             ],
             backgroundColor: Color(0xffD64D55),
           ),
