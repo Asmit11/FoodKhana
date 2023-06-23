@@ -1,9 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:foodkhana/DashBoardScreen.dart';
+import 'package:foodkhana/ForgetScreen.dart';
+import 'package:foodkhana/LoginScreen.dart';
+import 'package:foodkhana/OrderStatusApp.dart';
+import 'package:foodkhana/viewmodels/product_viewmodel.dart';
+import 'package:provider/provider.dart';
 
-// import 'DashboardScreen.dart';
-// import 'ForgetScreen.dart';
-// import 'LoginScreen.dart';
 import 'BillingScreen.dart';
 import 'RegisterScreen.dart';
 
@@ -23,15 +26,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+        providers: [
+        ChangeNotifierProvider(create: (_)=>ProductViewModel())
+    ],
+    child: MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.red,
-      ),
-      initialRoute: "/billing",
+      ), //m
+      initialRoute: "/login",
       routes: {
-        // "/login": (context) => LoginScreen(),
+        "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
+        "/forget-password": (context) => ForgetScreen(),
+        "/dashboard": (context) => DashBoardScreen(),
+        "/orderstatus": (context) => OrderStatusApp(),
+        "/billing": (context) => BillingScreen(),
+
         // "/forget-password": (context) => ForgetScreen(),
         // "/dasboard": (context) => DashBoardScreen(),
         "/orderstatus": (context) => OrderStatusPage(),
@@ -39,6 +51,7 @@ class MyApp extends StatelessWidget {
 
 
       },
+    ),
     );
   }
 }
