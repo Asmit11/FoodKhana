@@ -7,9 +7,6 @@ import 'package:foodkhana/OrderStatusApp.dart';
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
 import 'package:provider/provider.dart';
 
-// import 'DashBoardScreen.dart';
-// import 'ForgetScreen.dart';
-// import 'LoginScreen.dart';
 import 'BillingScreen.dart';
 import 'RegisterScreen.dart';
 
@@ -46,6 +43,13 @@ class MyApp extends StatelessWidget {
         "/dashboard": (context) => DashBoardScreen(),
         "/orderstatus": (context) => OrderStatusApp(),
         "/billing": (context) => BillingScreen(),
+
+        // "/forget-password": (context) => ForgetScreen(),
+        // "/dasboard": (context) => DashBoardScreen(),
+        "/orderstatus": (context) => OrderStatusPage(),
+        "/billing": (context) => BillingScreen(products: []),
+
+
       },
     ),
     );
