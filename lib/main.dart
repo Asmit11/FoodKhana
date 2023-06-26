@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:foodkhana/DashBoardScreen.dart';
 import 'package:foodkhana/ForgetScreen.dart';
 import 'package:foodkhana/LoginScreen.dart';
-import 'package:foodkhana/OrderStatusApp.dart';
+import 'package:foodkhana/OrderStatusPage.dart';
+
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -41,13 +42,10 @@ class MyApp extends StatelessWidget {
         "/register": (context) => RegisterScreen(),
         "/forget-password": (context) => ForgetScreen(),
         "/dashboard": (context) => DashBoardScreen(),
-        "/orderstatus": (context) => OrderStatusApp(),
+        "/orderstatus": (context) => OrderStatusPage(),
         "/billing": (context) => BillingScreen(),
 
-        // "/forget-password": (context) => ForgetScreen(),
-        // "/dasboard": (context) => DashBoardScreen(),
-        "/orderstatus": (context) => OrderStatusPage(),
-        "/billing": (context) => BillingScreen(products: []),
+
 
 
       },
