@@ -260,6 +260,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodkhana/BillingScreen.dart';
+import 'package:foodkhana/OrderStatusPage.dart';
 import 'package:foodkhana/repositories/ProductRepository.dart';
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -400,6 +402,17 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               ),
             ),
             actions: [
+              IconButton(
+              icon: Icon(Icons.cabin),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => OrderStatusPage(),
+                  ),
+                );
+              },
+            ),
               // ElevatedButton(
               //   style: ElevatedButton.styleFrom(
               //     backgroundColor: Color(0xffD64D55),
