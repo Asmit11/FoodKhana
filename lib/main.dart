@@ -1,13 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:foodkhana/DashBoardScreen.dart';
-import 'package:foodkhana/OrderStatusApp.dart';
+//import 'package:foodkhana/ForgetScreen.dart';
+//import 'package:foodkhana/LoginScreen.dart';
+//import 'package:foodkhana/OrderStatusPage.dart';
+import 'package:foodkhana/PaymentScreen.dart';
+
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
 import 'package:provider/provider.dart';
 
-// import 'DashBoardScreen.dart';
-// import 'ForgetScreen.dart';
-// import 'LoginScreen.dart';
 import 'BillingScreen.dart';
 import 'RegisterScreen.dart';
 
@@ -36,13 +37,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ), //m
-      initialRoute: "/orderstatus",
+      initialRoute: "/payment",
       routes: {
         // "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
-        // "/forget-password": (context) => ForgetScreen(),
+        //"/forget-password": (context) => ForgetScreen(),
         "/dashboard": (context) => DashBoardScreen(),
-        "/orderstatus": (context) => OrderStatusApp(),
+        //"/orderstatus": (context) => OrderStatusApp(),
+        "/payment": (context) => PaymentScreen(totalAmount: 50.0),
         "/billing": (context) => BillingScreen(products: []),
       },
     ),
