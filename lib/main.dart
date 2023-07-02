@@ -5,6 +5,9 @@ import 'package:foodkhana/DashBoardScreen.dart';
 //import 'package:foodkhana/LoginScreen.dart';
 //import 'package:foodkhana/OrderStatusPage.dart';
 import 'package:foodkhana/PaymentScreen.dart';
+import 'package:foodkhana/ForgetScreen.dart';
+import 'package:foodkhana/LoginScreen.dart';
+import 'package:foodkhana/OrderStatusPage.dart';
 
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -39,13 +42,16 @@ class MyApp extends StatelessWidget {
       ), //m
       initialRoute: "/payment",
       routes: {
-        // "/login": (context) => LoginScreen(),
+        "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
-        //"/forget-password": (context) => ForgetScreen(),
         "/dashboard": (context) => DashBoardScreen(),
-        //"/orderstatus": (context) => OrderStatusApp(),
         "/payment": (context) => PaymentScreen(totalAmount: 50.0),
-        "/billing": (context) => BillingScreen(products: []),
+        "/billing": (context) => BillingScreen(products: []
+        "/forget-password": (context) => ForgetScreen(),
+        "/dashboard": (context) => DashBoardScreen(),
+        "/orderstatus": (context) => OrderStatusPage(),
+        "/billing": (context) => BillingScreen(),
+
       },
     ),
     );

@@ -51,4 +51,19 @@ class ProductRepository{
     }
 
   }
+
+
+  addProduct(String name, String description) async{
+    try {
+          await FirebaseFirestore.instance.collection('products').add({
+            'name': name,
+            'description': description,
+          });
+        } catch (e) {
+          throw e;
+        }
+  }
+
+
+
 }
