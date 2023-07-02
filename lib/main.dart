@@ -40,19 +40,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ), //m
-      initialRoute: "/payment",
+      initialRoute: "/billing",
       routes: {
         "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
         "/dashboard": (context) => DashBoardScreen(),
         "/payment": (context) => PaymentScreen(totalAmount: 50.0),
-        "/billing": (context) => BillingScreen(products: []
-        "/forget-password": (context) => ForgetScreen(),
-        "/dashboard": (context) => DashBoardScreen(),
-        "/orderstatus": (context) => OrderStatusPage(),
         "/billing": (context) => BillingScreen(),
-
-      },
+        "forgot-password": (context) =>ForgetScreen(),
+        "dashboard": (context) => DashBoardScreen(),
+        "orderstatus": (context) => OrderStatusPage(),
+    },
     ),
     );
   }
