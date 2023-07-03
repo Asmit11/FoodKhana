@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:foodkhana/AddToCard.dart';
 import 'package:foodkhana/DashBoardScreen.dart';
 import 'package:foodkhana/ForgetScreen.dart';
 import 'package:foodkhana/LoginScreen.dart';
@@ -44,6 +45,8 @@ class MyApp extends StatelessWidget {
         "/dashboard": (context) => DashBoardScreen(),
         "/orderstatus": (context) => OrderStatusPage(),
         "/billing": (context) => BillingScreen(),
+        "/addtocart": (context) => AddToCart(),
+
 
 
 
