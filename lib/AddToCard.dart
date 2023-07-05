@@ -16,7 +16,7 @@ class ShoppingCartItem {
   ShoppingCartItem(this.menuItem, this.quantity);
 }
 
-class AddToCart {
+class ShoppingCart {
   List<ShoppingCartItem> items = [];
 
   void addItem(MenuItem menuItem, int quantity) {
@@ -60,53 +60,69 @@ class AddToCart {
   }
 }
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  // Initialize Firebase
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+class AddToCart extends StatefulWidget {
+  const AddToCart({Key? key}) : super(key: key);
 
-  // Sample menu items
-  MenuItem item1 = MenuItem('1', 'Cheeseburger', 10.99);
-  MenuItem item2 = MenuItem('2', 'French Fries', 8.99);
-  MenuItem item3 = MenuItem('3', 'Soft Drink', 12.99);
-
-  // Create a new shopping cart
-  AddToCart cart = AddToCart();
-
-  // Add items to the shopping cart
-  cart.addItem(item1, 2);
-  cart.addItem(item2, 1);
-  cart.addItem(item3, 3);
-
-  // Print the shopping cart
-  cart.printCart();
-
-  // Save the shopping cart to Firestore
-  saveCartToFirestore(firestore, cart);
-
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: Container(), // Empty container as a placeholder
-      ),
-    ),
-  );
+  @override
+  State<AddToCart> createState() => _AddToCartState();
 }
 
-void saveCartToFirestore(FirebaseFirestore firestore, AddToCart cart) async {
-  // Create a new Firestore collection reference for shopping carts
-  CollectionReference cartRef = firestore.collection('carts');
+class _AddToCartState extends State<AddToCart> {
+  @override
+  void initState() {
+    super.initState();
+    // Initialize Firebase
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  // Create a new Firestore document reference for the current cart
-  DocumentReference docRef = await cartRef.add({});
+    // Sample menu items
+    MenuItem item1 = MenuItem('1', 'Cheeseburger', 10.99);
+    MenuItem item2 = MenuItem('2', 'French Fries', 8.99);
+    MenuItem item3 = MenuItem('3', 'Soft Drink', 12.99);
 
-  // Save each cart item as a subcollection in Firestore
-  for (var item in cart.items) {
-    await docRef.collection('items').add({
-      'menuItemId': item.menuItem.id,
-      'quantity': item.quantity,
-    });
+    // Create a new shopping cart
+    ShoppingCart cart = ShoppingCart();
+
+    // Add items to the shopping cart
+    cart.addItem(item1, 2);
+    cart.addItem(item2, 1);
+    cart.addItem(item3, 3);
+
+    // Print the shopping cart
+    cart.printCart();
+
+    // Save the shopping cart to Firestore
+    saveCartToFirestore(firestore, cart);
   }
 
-  print('Shopping cart saved to Firestore with ID: ${docRef.id}');
+  void saveCartToFirestore(FirebaseFirestore firestore, ShoppingCart cart) async {
+    // Create a new Firestore collection reference for shopping carts
+    CollectionReference cartRef = firestore.collection('carts');
+
+    // Create a new Firestore document reference for the current cart
+    DocumentReference docRef = await cartRef.add({});
+
+    // Save each cart item as a subcollection in Firestore
+    for (var item in cart.items) {
+      await docRef.collection('items').add({
+        'menuItemId': item.menuItem.id,
+        'quantity': item.quantity,
+      });
+    }
+
+    print('Shopping cart saved to Firestore with ID: ${docRef.id}');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(); // Placeholder widget for the stateful widget
+  }
+}
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    MaterialApp(
+      home: AddToCart(),
+    ),
+  );
 }
