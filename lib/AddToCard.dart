@@ -20,7 +20,8 @@ class ShoppingCart {
   List<ShoppingCartItem> items = [];
 
   void addItem(MenuItem menuItem, int quantity) {
-    var existingItemIndex = items.indexWhere((item) => item.menuItem.id == menuItem.id);
+    var existingItemIndex =
+    items.indexWhere((item) => item.menuItem.id == menuItem.id);
 
     if (existingItemIndex != -1) {
       items[existingItemIndex].quantity += quantity;
@@ -52,7 +53,8 @@ class ShoppingCart {
     print('┃           Shopping Cart           ┃');
     print('┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫');
     for (var item in items) {
-      print('┃ ${item.menuItem.name} - Quantity: ${item.quantity.toString().padLeft(2)} ┃');
+      print(
+          '┃ ${item.menuItem.name} - Quantity: ${item.quantity.toString().padLeft(2)} ┃');
     }
     print('┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫');
     print('┃ Total Price: \$${calculateTotalPrice().toStringAsFixed(2).padLeft(7)} ┃');
@@ -94,7 +96,8 @@ class _AddToCartState extends State<AddToCart> {
     saveCartToFirestore(firestore, cart);
   }
 
-  void saveCartToFirestore(FirebaseFirestore firestore, ShoppingCart cart) async {
+  void saveCartToFirestore(
+      FirebaseFirestore firestore, ShoppingCart cart) async {
     // Create a new Firestore collection reference for shopping carts
     CollectionReference cartRef = firestore.collection('carts');
 
