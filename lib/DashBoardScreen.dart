@@ -133,7 +133,53 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     return Consumer<ProductViewModel>(
         builder: (context, productVM, child) {
           return Scaffold(
-            drawer: Drawer(),
+            drawer: SizedBox(
+                height: 739.0,
+                child: Drawer(child: ListView(
+                  children: [
+                    Column(
+                      children: [
+
+                        ListTile(
+                          title: Text('Account'),
+                          leading: Icon(Icons.account_box),
+                          onTap:(){
+                            Navigator.of(context).pushNamed("/viewprofile");
+                          } ,
+                        ),
+
+                        ListTile(
+                          title: Text('Order Status'),
+                          leading: Icon(Icons.cabin),
+                          onTap:(){
+                            Navigator.of(context).pushNamed("/orderstatus");
+                          },
+                        ),
+
+                        ListTile(
+                          title: Text('Settings'),
+                          leading: Icon(Icons.settings),
+                          onTap:(){
+
+                          } ,
+                        ),
+
+                        ListTile(
+                          title: Text('Logout'),
+                          textColor: Colors.red,
+                          leading: Icon(Icons.logout),
+                          iconColor: Colors.red,
+                          onTap:(){
+                            Navigator.of(context).pushNamed("/register");
+
+                          } ,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                )
+            ),
             appBar: AppBar(
               iconTheme: IconThemeData(color: Colors.white),
               title: Text(
@@ -141,20 +187,24 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 style: TextStyle(
                   color: Colors.white,
                 ),
-              ),
-              actions: [
-                IconButton(
-                  icon: Icon(Icons.cabin),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => OrderStatusPage(),
-                      ),
-                    );
-                  },
+              ),actions:[
+                  Positioned(
+                  bottom: 16,
+                  right: 16,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddToCart()),
+                      );
+                    },
+                    child: Icon(Icons.shopping_cart),
+
+                  ),
                 ),
-                FloatingActionButton(
+              ],
+            ),
+            floatingActionButton:FloatingActionButton(
                   onPressed: () {
                     Navigator.of(context).pushNamed("/dashboard");
                     showDialog(
@@ -200,73 +250,58 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   child: Icon(Icons.add),
                   backgroundColor: Color(0xffD64D55),
                 ),
-                // body: Stack(
-                // children: [
-                SingleChildScrollView(
-                  // Existing code for the body contents...
-                ),
-                Positioned(
-                  bottom: 16,
-                  right: 16,
-                  child: FloatingActionButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AddToCart()),
-                      );
-                    },
-                    child: Icon(Icons.shopping_cart),
-                    backgroundColor: Color(0xffD64D55),
-                  ),
-                ),
-                //   ],
-                // ),
-                SizedBox(height: 20),
-                SafeArea(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        ...productVM.productData.map(
-                              (e) =>
-                              Card(
-                                child: Column(
-                                  children: [
-                                    // Display your product details here
-                                    // Example: Text(e.name), Text(e.description)
+                body: Stack(
+                children: [
 
-                                    Container(
-                                      width: 120,
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          IconButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pushNamed(
-                                                  "/update-screen");
-                                            },
-                                            icon: Icon(Icons.edit),
-                                            color: Colors.black,
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              _showDialog(e.id);
-                                            },
-                                            icon: Icon(Icons.delete),
-                                            color: Colors.black,
-                                          ),
-                                        ],
+                  SizedBox(height: 20),
+                  SafeArea(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          ...productVM.productData.map(
+                                (e) =>
+                                Card(
+                                  child: Column(
+                                    children: [
+                                      // Display your product details here
+                                      // Example: Text(e.name), Text(e.description)
+
+                                      Container(
+                                        width: 120,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            IconButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pushNamed(
+                                                    "/update-screen");
+                                              },
+                                              icon: Icon(Icons.edit),
+                                              color: Colors.black,
+                                            ),
+                                            IconButton(
+                                              onPressed: () {
+                                                _showDialog(e.id);
+                                              },
+                                              icon: Icon(Icons.delete),
+                                              color: Colors.black,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
+                  ],
                 ),
-              ],
-            ),
+
+
+
           );
         }
     ); }
