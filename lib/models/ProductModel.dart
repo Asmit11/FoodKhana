@@ -16,6 +16,8 @@ class ProductModel {
   final String? address;
   final int? phone;
   final String? gender;
+  final String? name;
+  final String? description;
 
   ProductModel({
     required this.username,
@@ -23,6 +25,8 @@ class ProductModel {
     required this.address,
     required this.phone,
     required this.gender,
+    required this.name,
+    required this.description,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
@@ -31,6 +35,8 @@ class ProductModel {
     address: json["address"],
     phone: json["phone"],
     gender: json["gender"],
+    name: json["name"],
+    description: json["description"]
   );
 
   factory ProductModel.fromFirebaseSnapshot(DocumentSnapshot doc){
@@ -45,5 +51,7 @@ class ProductModel {
     "address": address,
     "phone": phone,
     "gender": gender,
+    "name": name,
+    "description": description
   };
 }

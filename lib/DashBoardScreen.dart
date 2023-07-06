@@ -19,6 +19,25 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
+  Future<void> fetchDataFromViewModel() async {
+    try {
+      final productViewModel =
+      Provider.of<ProductViewModel>(context, listen: false);
+      await productViewModel.fetchData();
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      fetchDataFromViewModel();
+    });
+  }
+
   Widget categoriesContainer({required String image, required String name}) {
     return Column(
       children: [
@@ -43,26 +62,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       ],
     );
   }
-
-  Future<void> fetchDataFromViewModel() async {
-    try {
-      final productViewModel =
-      Provider.of<ProductViewModel>(context, listen: false);
-      await productViewModel.fetchData();
-    } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.toString())));
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      fetchDataFromViewModel();
-    });
-  }
-
   // void signOut() async {
   //   try {
   //     await _auth.signOut();
@@ -252,7 +251,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 ),
                 body: Stack(
                 children: [
-
                   SizedBox(height: 20),
                   SafeArea(
                     child: SingleChildScrollView(
@@ -263,28 +261,30 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                 Card(
                                   child: Column(
                                     children: [
-                                      // Display your product details here
-                                      // Example: Text(e.name), Text(e.description)
-
                                       Container(
                                         width: 120,
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.end,
                                           children: [
-                                            IconButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pushNamed(
-                                                    "/update-screen");
-                                              },
-                                              icon: Icon(Icons.edit),
-                                              color: Colors.black,
-                                            ),
-                                            IconButton(
-                                              onPressed: () {
-                                                _showDialog(e.id);
-                                              },
-                                              icon: Icon(Icons.delete),
-                                              color: Colors.black,
+                                            Text(e.data().name.toString()),
+                                            Text(e.data().description.toString()),
+                                            Row(
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                children:[
+                                                  IconButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context).pushNamed(
+                                                          "/update-screen", arguments: e.id);
+                                                    },
+                                                    icon: Icon(Icons.edit),
+                                                    color: Colors.black,
+                                                  ),
+                                                  IconButton(
+                                                    onPressed: () {
+                                                      _showDialog(e.id);
+                                                    },
+                                                    icon: Icon(Icons.delete),
+                                                    color: Colors.black,)
+                                                ]
                                             ),
                                           ],
                                         ),

@@ -37,16 +37,16 @@ class Cart {
 class AddToCart extends StatelessWidget {
   final Cart cart = Cart();
   final List<Product> products = [
-    Product(name: 'Product 1', price: 10.99),
-    Product(name: 'Product 2', price: 19.99),
-    Product(name: 'Product 3', price: 7.99),
+    Product(name: 'Burger', price:250),
+    Product(name: 'Momo', price:120),
+    Product(name: 'Pizza', price: 800),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product List'),
+        title: Text('Add to Cart'),
       ),
       body: ListView.builder(
         itemCount: products.length,
