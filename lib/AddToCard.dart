@@ -88,6 +88,6 @@ class AddToCart extends StatelessWidget {
 void main() {
   runApp(MaterialApp(
     title: 'Add to Cart',
-    home: ProductListScreen(),
+    home: AddToCart(),
   ));
 }
