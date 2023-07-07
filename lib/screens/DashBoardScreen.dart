@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:foodkhana/AddToCard.dart';
-import 'package:foodkhana/OrderStatusPage.dart';
+
 import 'package:foodkhana/repositories/ProductRepository.dart';
+import 'package:foodkhana/screens/AddToCard.dart';
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -129,8 +129,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Consumer<ProductViewModel>(
         builder: (context, productVM, child) {
+          print(productVM.productData);
           return Scaffold(
             drawer: SizedBox(
                 height: 739.0,
@@ -187,10 +189,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   color: Colors.white,
                 ),
               ),actions:[
-                  Positioned(
-                  bottom: 16,
-                  right: 16,
-                  child: ElevatedButton(
+                  ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -200,7 +199,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     child: Icon(Icons.shopping_cart),
 
                   ),
-                ),
               ],
             ),
             floatingActionButton:FloatingActionButton(
@@ -262,7 +260,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                   child: Column(
                                     children: [
                                       Container(
-                                        width: 120,
                                         child: Column(
                                           children: [
                                             Text(e.data().name.toString()),
@@ -270,6 +267,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                             Row(
                                                 mainAxisAlignment: MainAxisAlignment.end,
                                                 children:[
+                                                  IconButton(
+                                                    onPressed: (){},
+                                                      icon: Icon(Icons.shopping_cart),
+                                                    color: Colors.red,
+                                                  ),
                                                   IconButton(
                                                     onPressed: () {
                                                       Navigator.of(context).pushNamed(

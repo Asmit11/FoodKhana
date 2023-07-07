@@ -30,13 +30,13 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-    username: json["username"],
-    email: json["email"],
-    address: json["address"],
-    phone: json["phone"],
-    gender: json["gender"],
-    name: json["name"],
-    description: json["description"]
+      username: json["username"],
+      email: json["email"],
+      address: json["address"],
+      phone: json["phone"],
+      gender: json["gender"],
+      name: json["name"],
+      description: json["description"]
   );
 
   factory ProductModel.fromFirebaseSnapshot(DocumentSnapshot doc){

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import '../models/ProductModel.dart';
+
 import '../repositories/ProductRepository.dart';
 
 class ProductViewModel with ChangeNotifier{
@@ -13,7 +14,6 @@ class ProductViewModel with ChangeNotifier{
       _productData=response;
       notifyListeners();
     }catch(e){
-
       print(e);
     }
   }
