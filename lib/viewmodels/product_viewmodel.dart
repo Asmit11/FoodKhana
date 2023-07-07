@@ -13,6 +13,7 @@ class ProductViewModel with ChangeNotifier{
       _productData=response;
       notifyListeners();
     }catch(e){
+
       print(e);
     }
   }
