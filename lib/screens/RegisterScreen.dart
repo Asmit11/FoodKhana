@@ -304,7 +304,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),),
                       InkWell(
                           onTap: (){
-                            Navigator.of(context).pop();
+                            Navigator.of(context).pushNamed("/login");
                           },
                           child: Text("Sign in", style: TextStyle(color: Colors.blue),))
                     ],
