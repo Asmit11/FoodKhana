@@ -55,28 +55,41 @@ class AddToCart extends StatelessWidget {
           return ListTile(
             title: Text(product.name),
             subtitle: Text('\$${product.price}'),
-            trailing: IconButton(
-              icon: Icon(Icons.add_shopping_cart),
-              onPressed: () {
-                cart.addToCart(product);
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Success'),
-                      content: Text('Product added to cart!'),
-                      actions: [
-                        TextButton(
-                          child: Text('OK'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.add_shopping_cart),
+                  onPressed: () {
+                    cart.addToCart(product);
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Success'),
+                          content: Text('Product added to cart!'),
+                          actions: [
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
                     );
                   },
-                );
-              },
+                ),
+
+                IconButton(
+                  icon: Icon(Icons.note_add_outlined),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed("/specialrequest");
+                    // Handle favorite button press
+                  },
+                ),
+              ],
             ),
           );
         },
