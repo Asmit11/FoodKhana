@@ -13,7 +13,7 @@ class _SpecialRequestState extends State<SpecialRequest> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xffD64D55),
+          backgroundColor: Colors.red,
           leading: IconButton(onPressed: () {
             Navigator.of(context).pushNamed("/dashboard");
           },
@@ -42,8 +42,9 @@ class _SpecialRequestState extends State<SpecialRequest> {
               Padding(
                 padding: EdgeInsets.only(top: 12, bottom: 12),
                 child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Color(0xffD64D55)),
+                    style: ElevatedButton.styleFrom(primary: Colors.red),
                     onPressed: () {
+                      Navigator.of(context).pushNamed("/addtocart");
                       final snackBar = SnackBar(
                         content: Text('Request Added'),
                       );

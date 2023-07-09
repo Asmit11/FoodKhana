@@ -46,6 +46,10 @@ class AddToCart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: () {
+          Navigator.of(context).pushNamed("/dashboard");
+        },
+          icon: const Icon(Icons.arrow_back),),
         title: Text('Add to Cart'),
       ),
       body: ListView.builder(
