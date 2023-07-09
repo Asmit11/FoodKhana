@@ -9,12 +9,14 @@ import 'package:foodkhana/ForgetScreen.dart';
 import 'package:foodkhana/LoginScreen.dart';
 import 'package:foodkhana/OrderStatusPage.dart';
 
+
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import 'BillingScreen.dart';
 import 'RegisterScreen.dart';
 
+import 'SplitBillScreen.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -40,16 +42,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ), //m
-      initialRoute: "/billing",
+      initialRoute: "/split-bill",
       routes: {
-        "/login": (context) => LoginScreen(),
-        "/register": (context) => RegisterScreen(),
-        "/dashboard": (context) => DashBoardScreen(),
-        "/payment": (context) => PaymentScreen(totalAmount: 50.0),
-        "/billing": (context) => BillingScreen(),
-        "forgot-password": (context) =>ForgetScreen(),
-        "dashboard": (context) => DashBoardScreen(),
-        "orderstatus": (context) => OrderStatusPage(),
+    "/login": (context) => LoginScreen(),
+    "/register": (context) => RegisterScreen(),
+    "/dashboard": (context) => DashBoardScreen(),
+    "/payment": (context) => PaymentScreen(totalAmount: 50.0),
+    "/billing": (context) => BillingScreen(),
+    "forgot-password": (context) =>ForgetScreen(),
+    "dashboard": (context) => DashBoardScreen(),
+    "orderstatus": (context) => OrderStatusPage(),
+    '/split-bill': (context) => SplitBillScreen(splitAmount: 0.0), // Pass a default value here
     },
     ),
     );
