@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/ProductModel.dart';
 class ProductRepository{
-  final instance = FirebaseFirestore.instance.collection("users").withConverter(
+  final instance = FirebaseFirestore.instance.collection("products").withConverter(
       fromFirestore: (snapshot, _){
         return ProductModel.fromFirebaseSnapshot(snapshot);
         },

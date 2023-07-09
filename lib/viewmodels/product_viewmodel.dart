@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import '../models/ProductModel.dart';
-import '../../../../Desktop/Foodkhana/lib/repositories/ProductRepository.dart';
+
 import '../repositories/ProductRepository.dart';
 
 class ProductViewModel with ChangeNotifier{
