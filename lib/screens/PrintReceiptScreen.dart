@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter/material.dart';
+import 'dart:typed_data';
 
 void main() {
   runApp(MyApp());
@@ -13,12 +16,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ReceiptPrinterPage(),
+      home: PrintReceiptScreen(),
     );
   }
 }
 
-class ReceiptPrinterPage extends StatelessWidget {
+class PrintReceiptScreen extends StatelessWidget {
   final BlueThermalPrinter bluetoothPrinter = BlueThermalPrinter.instance;
 
   @override
@@ -58,8 +61,6 @@ class ReceiptPrinterPage extends StatelessWidget {
     }
 
     try {
-      bluetoothPrinter.setPaperType(PaperSize.mm80);
-
       List<int> bytes = [];
 
       // Add receipt content as bytes
@@ -71,7 +72,9 @@ class ReceiptPrinterPage extends StatelessWidget {
       bytes.addAll(utf8.encode('Total           15.0\n'));
       bytes.addAll(utf8.encode('Thank you!\n'));
 
-      await bluetoothPrinter.writeBytes(bytes);
+      Uint8List data = Uint8List.fromList(bytes);
+
+      await bluetoothPrinter.writeBytes(data);
 
       showDialog(
         context: context,

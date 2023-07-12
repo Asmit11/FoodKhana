@@ -6,17 +6,14 @@ import 'package:foodkhana/screens/ForgetScreen.dart';
 import 'package:foodkhana/screens/LoginScreen.dart';
 import 'package:foodkhana/screens/ManagerDashboard.dart';
 import 'package:foodkhana/screens/OrderStatusPage.dart';
+import 'package:foodkhana/screens/PrintReceiptScreen.dart';
 import 'package:foodkhana/services/local_notification_service.dart';
 import 'package:foodkhana/viewmodels/auth_viewmodel.dart';
 import 'package:foodkhana/viewmodels/global_ui_viewmodel.dart';
-
-
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
 import 'package:provider/provider.dart';
-
 import 'screens/BillingScreen.dart';
 import 'screens/RegisterScreen.dart';
-
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -46,7 +43,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ), //m
-      initialRoute: "/dashboard",
+      initialRoute: "/printreceipt",
       routes: {
         "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
@@ -56,6 +53,7 @@ class MyApp extends StatelessWidget {
         "/billing": (context) => BillingScreen(),
         "/addtocart": (context) => AddToCart(),
         "/managerdashboard": (context) => ManagerDashboard(),
+        "printreceipt": (context) => PrintReceiptScreen(),
 
 
 
