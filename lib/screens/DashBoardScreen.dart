@@ -6,6 +6,8 @@ import 'package:foodkhana/repositories/ProductRepository.dart';
 import 'package:foodkhana/screens/AddToCard.dart';
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
 import 'package:provider/provider.dart';
+import '../repositories/CardRepository.dart';
+
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({Key? key}) : super(key: key);
@@ -268,7 +270,26 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                                 mainAxisAlignment: MainAxisAlignment.end,
                                                 children:[
                                                   IconButton(
-                                                    onPressed: (){},
+                                                    onPressed: (){
+                                                      AddToCartRepository().addToCart(e.data(), "123");
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext context) {
+                                                          return AlertDialog(
+                                                            title: Text('Success'),
+                                                            content: Text('Product added to cart!'),
+                                                            actions: [
+                                                              TextButton(
+                                                                child: Text('OK'),
+                                                                onPressed: () {
+                                                                  Navigator.of(context).pop();
+                                                                },
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
+                                                      );
+                                                    },
                                                       icon: Icon(Icons.shopping_cart),
                                                     color: Colors.red,
                                                   ),

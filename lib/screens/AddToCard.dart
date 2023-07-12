@@ -58,6 +58,7 @@ class AddToCart extends StatelessWidget {
             trailing: IconButton(
               icon: Icon(Icons.add_shopping_cart),
               onPressed: () {
+                print("cart");
                 cart.addToCart(product);
                 showDialog(
                   context: context,
