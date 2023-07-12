@@ -1,78 +1,126 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:foodkhana/models/CartModel.dart';
 import 'package:foodkhana/models/ProductModel.dart';
-import '../models/CartModel.dart';
+import 'package:foodkhana/screens/AddToCard.dart';
+import 'package:foodkhana/services/firebase_service.dart';
 
-class AddToCartRepository {
-  final instance = FirebaseFirestore.instance.collection("cart").withConverter(
-        fromFirestore: (snapshot, _) {
-          return CartModel.fromFirebaseSnapshot(snapshot);
-        },
-        toFirestore: (CartModel model, _) => model.toJson(),
-      );
 
-  Future<dynamic> addToCart(ProductModel data, String id) async {
+
+class CartRepository {
+  final instance = FirebaseService.db.collection("cart").withConverter(
+    fromFirestore: (snapshot, _) {
+      return CartModel.fromFirebaseSnapshot(snapshot);
+    },
+    toFirestore: (CartModel model, _) => model.toJson(),
+  );
+
+  Future<dynamic> addToCart(ProductModel data) async {
     try {
-      final response = await instance.where("userid", isEqualTo: id).get();
-      print(response.size);
-      dynamic result;
-      if (response.size == 0) {
-        print("add");
-        result = await instance.add(CartModel(userid: id, products: [data]));
-      } else {
-        await instance.doc(response.docs.first.id)
-            .set({'products': FieldValue.arrayUnion(data as List)} as CartModel);
+      if (FirebaseAuth.instance.currentUser == null) {
+        return;
       }
-
-      return result;
-    } catch (e) {
-      print(e);
+      FirebaseAuth.instance.currentUser!.uid;
+      try {
+        final response = await instance
+            .where("user_id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+            .get();
+        print(response.docs.isEmpty);
+        String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+        if (response.docs.isEmpty) {
+          final CartModel _data =
+          CartModel(user_id: uid, items: [CartItem(product: data, quantity: 1)]);
+          await instance.add(_data);
+        } else {
+          var cart = response.docs.single.data();
+          var checkProduct = cart.items.indexWhere((element) => element.product.id == data.id);
+          if (checkProduct == -1) {
+            cart.items.add(CartItem(product: data, quantity: 1));
+            await instance.doc(response.docs.single.id).set(cart);
+          } else {
+            cart.items[checkProduct].quantity += 1;
+            await instance.doc(response.docs.single.id).set(cart);
+          }
+        }
+      } catch (err) {
+        rethrow;
+      }
+    } catch (error) {
+      print(error);
     }
+    return null;
   }
 
-  Future<List<QueryDocumentSnapshot<Object>>> fetchAllCartItems() async {
+  Future<dynamic> removeFromCart(ProductModel data) async {
     try {
-      final result = (await instance.get()).docs;
-      return result;
-    } catch (e) {
-      return [];
+      if (FirebaseAuth.instance.currentUser == null) {
+        return;
+      }
+      FirebaseAuth.instance.currentUser!.uid;
+      try {
+        final response = await instance
+            .where("user_id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+            .get();
+
+        var cart = response.docs.single.data();
+        var checkProduct = cart.items.indexWhere((element) => element.product.id == data.id);
+        if (cart.items[checkProduct].quantity <= 1) {
+          cart.items.removeAt(checkProduct);
+          await instance.doc(response.docs.single.id).set(cart);
+        } else {
+          cart.items[checkProduct].quantity -= 1;
+          await instance.doc(response.docs.single.id).set(cart);
+        }
+      } catch (err) {
+        rethrow;
+      }
+    } catch (error) {
+      print(error);
     }
+    return null;
+  }
+  Future<dynamic> removeItemFromCart(ProductModel data) async {
+    try {
+      if (FirebaseAuth.instance.currentUser == null) {
+        return;
+      }
+      FirebaseAuth.instance.currentUser!.uid;
+      try {
+        final response = await instance
+            .where("user_id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+            .get();
+
+        var cart = response.docs.single.data();
+        var checkProduct = cart.items.indexWhere((element) => element.product.id == data.id);
+        cart.items.removeAt(checkProduct);
+        await instance.doc(response.docs.single.id).set(cart);
+
+      } catch (err) {
+        rethrow;
+      }
+    } catch (error) {
+      print(error);
+    }
+    return null;
   }
 
-  Future<void> removeFromCart(String id) async {
+  Future<dynamic> getCart() async {
     try {
-      await instance.doc(id).delete();
-    } catch (e) {
-      rethrow;
+      if (FirebaseAuth.instance.currentUser == null) {
+        return;
+      }
+      FirebaseAuth.instance.currentUser!.uid;
+      try {
+        final response = await instance
+            .where("user_id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+            .get();
+        return response.docs.single.data();
+      } catch (err) {
+        rethrow;
+      }
+    } catch (error) {
+      print(error);
     }
-  }
-
-  Future<CartModel> getCartItem(String id) async {
-    try {
-      final cartItem = await instance.doc(id).get();
-      return cartItem.data()!;
-    } catch (e) {
-      print(e);
-      rethrow;
-    }
-  }
-
-  Future<dynamic> updateCartItem(String id, CartModel data) async {
-    try {
-      await instance.doc(id).set(data);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  addToCartWithDetails(String name, int quantity, double price) async {
-    try {
-      await FirebaseFirestore.instance.collection('cart').add({
-        'name': name,
-        'quantity': quantity,
-        'price': price,
-      });
-    } catch (e) {
-      throw e;
-    }
+    return null;
   }
 }

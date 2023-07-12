@@ -1,45 +1,58 @@
-// To parse this JSON data, do
-//
-//     final cartModel = cartModelFromJson(jsonString);
-
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodkhana/models/ProductModel.dart';
 
-CartModel cartModelFromJson(String str) => CartModel.fromJson(json.decode(str));
 
-String cartModelToJson(CartModel data) => json.encode(data.toJson());
 
 class CartModel {
+
+  CartModel({required this.items, required this.user_id});
+
+  List<CartItem> items;
   String? id;
-  List<ProductModel>? products;
-  String? userid;
-  CartModel({
-    this.id,
-    this.products,
-    this.userid,
-  });
+  String? user_id;
+
+  factory CartModel.fromFirebaseSnapshot(DocumentSnapshot doc){
+    final data = doc.data()! as Map<String, dynamic>;
+    data["id"] = doc.id;
+    return CartModel.fromJson(data);
+  }
+
 
   factory CartModel.fromJson(Map<String, dynamic> json) => CartModel(
-    id: json["id"],
-    userid: json["userid"],
-    products: json["products"] == null ? [] : List<ProductModel>.from(json["products"]!.map((x) => ProductModel.fromJson(x))),
+    items: List<CartItem>.from(json["items"]!.map((x) => CartItem.fromJson(x))),
+    user_id: json["user_id"],
   );
 
-  factory CartModel.fromFirebaseSnapshot(DocumentSnapshot<Map<String, dynamic>> json) {
-    return CartModel(
-      id: json.id,
-      userid: json["userid"],
-      products: json["products"] == null ? [] : List<ProductModel>.from(json["products"]!.map((x) => ProductModel.fromJson(x))),
-    );
-  }
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "userid": userid,
-    "products": products == null ? [] : List<dynamic>.from(products!.map((x) => x.toJson())),
+    "items": List<dynamic>.from(items.map((x) => x.toJson())),
+    "user_id": user_id,
   };
+}
 
+class CartItem {
+  ProductModel product;
+  int quantity;
+
+
+  factory CartItem.fromFirebaseSnapshot(DocumentSnapshot doc){
+    final data = doc.data()! as Map<String, dynamic>;
+    data["id"] = doc.id;
+    return CartItem.fromJson(data);
+  }
+
+
+  factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
+    product: ProductModel.fromJson(json["product"]),
+    quantity: json["quantity"],
+  );
+
+  CartItem({required this.product, required this.quantity,});
+
+  Map<String, dynamic> toJson() => {
+    "quantity": quantity,
+    "product": product.toJson(),
+  };
 
 }

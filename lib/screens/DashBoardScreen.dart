@@ -271,7 +271,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                                 children:[
                                                   IconButton(
                                                     onPressed: (){
-                                                      AddToCartRepository().addToCart(e.data(), "123");
+                                                      CartRepository().addToCart(e.data());
                                                       showDialog(
                                                         context: context,
                                                         builder: (BuildContext context) {
