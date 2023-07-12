@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:foodkhana/models/CartModel.dart';
 import 'package:foodkhana/repositories/CardRepository.dart';
 
-// import 'models/CartModel.dart';
 
 class AddToCart extends StatefulWidget {
   const AddToCart({Key? key}) : super(key: key);
