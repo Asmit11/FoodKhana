@@ -1,5 +1,5 @@
+import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter/material.dart';
-
 
 void main() {
   runApp(MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 }
 
 class ReceiptPrinterPage extends StatelessWidget {
-  final PrinterNetworkManager printerManager = PrinterNetworkManager();
+  final BlueThermalPrinter bluetoothPrinter = BlueThermalPrinter.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +37,14 @@ class ReceiptPrinterPage extends StatelessWidget {
   }
 
   Future<void> printReceipt(BuildContext context) async {
-    final PosPrintResult res = await printerManager.connect('192.168.1.10', port: 9100);
-
-    if (res != PosPrintResult.success) {
+    bool? connected = await bluetoothPrinter.isConnected;
+    if (connected != true) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Error'),
-            content: Text('Failed to connect to the printer.'),
+            content: Text('Printer not connected.'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -58,22 +57,44 @@ class ReceiptPrinterPage extends StatelessWidget {
       return;
     }
 
-    const PaperSize paper = PaperSize.mm80;
+    try {
+      bluetoothPrinter.setPaperType(PaperSize.mm80);
 
-    final PosPrintResult printResult = await printerManager.printTicket(
-      await _ticket(paper),
-      printerManager: printerManager,
-    );
+      List<int> bytes = [];
 
-    await printerManager.disconnect();
+      // Add receipt content as bytes
+      bytes.addAll(utf8.encode('My Store\n'));
+      bytes.addAll(utf8.encode('Date: ${DateTime.now()}\n'));
+      bytes.addAll(utf8.encode('Item      Qty   Price\n'));
+      bytes.addAll(utf8.encode('Product 1 1     10.0\n'));
+      bytes.addAll(utf8.encode('Product 2 2     5.0\n'));
+      bytes.addAll(utf8.encode('Total           15.0\n'));
+      bytes.addAll(utf8.encode('Thank you!\n'));
 
-    if (printResult != PosPrintResult.success) {
+      await bluetoothPrinter.writeBytes(bytes);
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Success'),
+            content: Text('Receipt printed successfully.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Error'),
-            content: Text('Failed to print the receipt.'),
+            content: Text('An error occurred while printing the receipt.'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -84,47 +105,5 @@ class ReceiptPrinterPage extends StatelessWidget {
         },
       );
     }
-  }
-
-  Future<Ticket> _ticket(PaperSize paper) async {
-    final Ticket ticket = Ticket(paper);
-
-    ticket.text('My Store', styles: PosStyles(align: PosAlign.center, bold: true));
-    ticket.feed(1);
-
-    ticket.text('Date: ${DateTime.now()}', styles: PosStyles(align: PosAlign.left));
-    ticket.feed(1);
-
-    ticket.row([
-      PosColumn(text: 'Item', width: 6),
-      PosColumn(text: 'Qty', width: 2),
-      PosColumn(text: 'Price', width: 4),
-    ]);
-
-    ticket.row([
-      PosColumn(text: 'Product 1', width: 6),
-      PosColumn(text: '1', width: 2),
-      PosColumn(text: '10.0', width: 4),
-    ]);
-
-    ticket.row([
-      PosColumn(text: 'Product 2', width: 6),
-      PosColumn(text: '2', width: 2),
-      PosColumn(text: '5.0', width: 4),
-    ]);
-
-    ticket.feed(1);
-
-    ticket.row([
-      PosColumn(text: 'Total', width: 6),
-      PosColumn(text: '', width: 2),
-      PosColumn(text: '15.0', width: 4),
-    ]);
-
-    ticket.feed(2);
-
-    ticket.text('Thank you!', styles: PosStyles(align: PosAlign.center, bold: true));
-
-    return ticket;
   }
 }
