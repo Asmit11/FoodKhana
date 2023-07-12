@@ -4,40 +4,15 @@ import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
 
-void main() {
-  runApp(MyApp());
-}
+class PrintReceiptScreen extends StatefulWidget {
+  PrintReceiptScreen({Key? key}) : super(key: key);
 
-class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Receipt Printer',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: PrintReceiptScreen(),
-    );
-  }
+  PrintReceiptScreenState createState() => PrintReceiptScreenState();
 }
 
-class PrintReceiptScreen extends StatelessWidget {
+class PrintReceiptScreenState extends State<PrintReceiptScreen> {
   final BlueThermalPrinter bluetoothPrinter = BlueThermalPrinter.instance;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Receipt Printer'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () => printReceipt(context),
-          child: Text('Print Receipt'),
-        ),
-      ),
-    );
-  }
 
   Future<void> printReceipt(BuildContext context) async {
     bool? connected = await bluetoothPrinter.isConnected;
@@ -108,5 +83,20 @@ class PrintReceiptScreen extends StatelessWidget {
         },
       );
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Receipt Printer'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () => printReceipt(context),
+          child: Text('Print Receipt'),
+        ),
+      ),
+    );
   }
 }

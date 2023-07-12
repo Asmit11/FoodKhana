@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         "/billing": (context) => BillingScreen(),
         "/addtocart": (context) => AddToCart(),
         "/managerdashboard": (context) => ManagerDashboard(),
-        "printreceipt": (context) => PrintReceiptScreen(),
+        "/printreceipt": (context) => PrintReceiptScreen(),
 
 
 
