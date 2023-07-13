@@ -46,15 +46,15 @@ class _AddToCartState extends State<AddToCart> {
                         (element.product.description ?? 0) * total;
                   });
                   return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Text("Total Items : ${total.toString()}"),
-                      ),
-                      Container(
-                        child: Text("Total Price : ${total_price.toString()}"),
-                      ),
-                    ],
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // children: [
+                    //   Container(
+                    //     child: Text("Total Items : ${total.toString()}"),
+                    //   ),
+                    //   Container(
+                    //     child: Text("Total Price : ${total_price.toString()}"),
+                    //   ),
+                    // ],
                   );
                 },
               ),
@@ -117,7 +117,7 @@ class _AddToCartState extends State<AddToCart> {
                     ),
                   );
                 },
-                child: Text('Go to Billing'),
+                child: Icon(Icons.payment),
               ),
             ],
           ),
