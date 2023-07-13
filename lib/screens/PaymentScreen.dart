@@ -93,7 +93,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('FoodKhana'),
+        title: Text('Restaurant POS'),
       ),
       body: Center(
         child: ElevatedButton(
