@@ -300,20 +300,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                                   icon: Icon(Icons.shopping_cart),
                                                   color: Colors.red,
                                                 ),
-                                                IconButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pushNamed(
-                                                        "/update-screen", arguments: e.id);
-                                                  },
-                                                  icon: Icon(Icons.edit),
-                                                  color: Colors.black,
-                                                ),
-                                                IconButton(
-                                                  onPressed: () {
-                                                    _showDialog(e.id);
-                                                  },
-                                                  icon: Icon(Icons.delete),
-                                                  color: Colors.black,)
                                               ]
                                           ),
                                         ],

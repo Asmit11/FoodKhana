@@ -265,29 +265,7 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                                           Row(
                                               mainAxisAlignment: MainAxisAlignment.end,
                                               children:[
-                                                IconButton(
-                                                  onPressed: (){
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (BuildContext context) {
-                                                        return AlertDialog(
-                                                          title: Text('Success'),
-                                                          content: Text('Product added to cart!'),
-                                                          actions: [
-                                                            TextButton(
-                                                              child: Text('OK'),
-                                                              onPressed: () {
-                                                                Navigator.of(context).pop();
-                                                              },
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    );
-                                                  },
-                                                  icon: Icon(Icons.shopping_cart),
-                                                  color: Colors.red,
-                                                ),
+
                                                 IconButton(
                                                   onPressed: () {
                                                     Navigator.of(context).pushNamed(
