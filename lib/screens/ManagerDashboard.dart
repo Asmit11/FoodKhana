@@ -195,16 +195,7 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                   color: Colors.white,
                 ),
               ),actions:[
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AddToCart()),
-                  );
-                },
-                child: Icon(Icons.shopping_cart),
 
-              ),
             ],
             ),
             floatingActionButton:FloatingActionButton(
