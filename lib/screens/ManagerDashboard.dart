@@ -148,6 +148,14 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                         ),
 
                         ListTile(
+                          title: Text('Switch to Dashboard'),
+                          leading: Icon(Icons.switch_account),
+                          onTap:(){
+                            Navigator.of(context).pushNamed("/dashboard");
+                          },
+                        ),
+
+                        ListTile(
                           title: Text('Order Status'),
                           leading: Icon(Icons.cabin),
                           onTap:(){
