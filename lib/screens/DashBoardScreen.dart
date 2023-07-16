@@ -182,8 +182,37 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           leading: Icon(Icons.delete),
                           iconColor: Colors.red,
                           onTap:(){
-                            Navigator.of(context).pushNamed("/register");
-
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Confirmation'),
+                                  content: Text('Are you sure you want to delete the account?'),
+                                  actions: [
+                                    ElevatedButton(
+                                      child: Text('No'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop(false); // Return false when "No" is pressed
+                                      },
+                                    ),
+                                    ElevatedButton(
+                                      child: Text('Yes'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop(true); // Return true when "Yes" is pressed
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            ).then((value) {
+                              if (value != null && value) {
+                                // User pressed "Yes"
+                                // Do something here
+                              } else {
+                                // User pressed "No" or dialog was dismissed
+                                // Do something here
+                              }
+                            });
                           } ,
                         ),
                         ListTile(
