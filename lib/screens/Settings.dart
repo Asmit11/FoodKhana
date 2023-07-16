@@ -13,7 +13,11 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        )
+          backgroundColor: Color(0xffD64D55),
+          leading: IconButton(onPressed: () {
+          },
+            icon: const Icon(Icons.arrow_back),),
+          title: Text("Settings"),),
     );
         }
 }

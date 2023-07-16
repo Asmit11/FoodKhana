@@ -177,6 +177,16 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         ),
 
                         ListTile(
+                          title: Text('Delete Profile'),
+                          textColor: Colors.red,
+                          leading: Icon(Icons.delete),
+                          iconColor: Colors.red,
+                          onTap:(){
+                            Navigator.of(context).pushNamed("/register");
+
+                          } ,
+                        ),
+                        ListTile(
                           title: Text('Logout'),
                           textColor: Colors.red,
                           leading: Icon(Icons.logout),
