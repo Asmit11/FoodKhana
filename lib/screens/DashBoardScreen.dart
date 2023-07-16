@@ -198,7 +198,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                     ElevatedButton(
                                       child: Text('Yes'),
                                       onPressed: () {
-                                        Navigator.of(context).pop(true); // Return true when "Yes" is pressed
+                                        Navigator.of(context).pushNamed("/register");
+                                        final snackBar = SnackBar(
+                                          content: Text('Your account has been deleted successfully'),
+                                        );
+                                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                       },
                                     ),
                                   ],

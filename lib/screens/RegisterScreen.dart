@@ -79,9 +79,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 children: [
                   Image.asset(
-                    "assets/images/logo.png",
-                    height: 100,
-                    width: 100,
+                    "assets/images/Foodkhanalogo.png",
+                    height: 200,
+                    width: 200,
                   ),
                   SizedBox(height: 10,),
                   TextFormField(
@@ -306,7 +306,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onTap: (){
                             Navigator.of(context).pushNamed("/login");
                           },
-                          child: Text("Sign in", style: TextStyle(color: Colors.blue),))
+                          child: Text("Sign in", style: TextStyle(color: Colors.red),))
                     ],
                   ),
 
