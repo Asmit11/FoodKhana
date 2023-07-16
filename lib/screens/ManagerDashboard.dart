@@ -139,7 +139,6 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                   children: [
                     Column(
                       children: [
-
                         ListTile(
                           title: Text('Account'),
                           leading: Icon(Icons.account_box),

@@ -151,6 +151,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         ),
 
                         ListTile(
+                          title: Text('Switch to Manager'),
+                          leading: Icon(Icons.switch_account),
+                          onTap:(){
+                            Navigator.of(context).pushNamed("/managerdashboard");
+                          },
+                        ),
+
+
+                        ListTile(
                           title: Text('Order Status'),
                           leading: Icon(Icons.cabin),
                           onTap:(){
