@@ -171,6 +171,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           title: Text('Settings'),
                           leading: Icon(Icons.settings),
                           onTap:(){
+                            Navigator.of(context).pushNamed("/settings");
 
                           } ,
                         ),

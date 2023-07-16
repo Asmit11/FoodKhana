@@ -7,6 +7,7 @@ import 'package:foodkhana/screens/LoginScreen.dart';
 import 'package:foodkhana/screens/ManagerDashboard.dart';
 import 'package:foodkhana/screens/ManagerLoginScreen.dart';
 import 'package:foodkhana/screens/OrderStatusPage.dart';
+import 'package:foodkhana/screens/Settings.dart';
 import 'package:foodkhana/screens/SpecialRequest.dart';
 import 'package:foodkhana/services/local_notification_service.dart';
 import 'package:foodkhana/viewmodels/auth_viewmodel.dart';
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
         "/managerdashboard": (context) => ManagerDashboard(),
         "/specialrequest": (context) => SpecialRequest(),
         "/managerlogin": (context) => ManagerLoginScreen(),
+        "/settings": (context) => Settings(),
 
 
 

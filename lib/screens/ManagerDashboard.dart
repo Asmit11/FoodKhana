@@ -167,6 +167,7 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                           title: Text('Settings'),
                           leading: Icon(Icons.settings),
                           onTap:(){
+                            Navigator.of(context).pushNamed("/settings");
 
                           } ,
                         ),
