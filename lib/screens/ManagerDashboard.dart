@@ -190,7 +190,7 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
             appBar: AppBar(
               iconTheme: IconThemeData(color: Colors.white),
               title: Text(
-                'Home',
+                'Inventory',
                 style: TextStyle(
                   color: Colors.white,
                 ),
