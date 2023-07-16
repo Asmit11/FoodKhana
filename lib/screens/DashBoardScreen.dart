@@ -7,6 +7,7 @@ import 'package:foodkhana/screens/AddToCard.dart';
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
 import 'package:provider/provider.dart';
 
+
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({Key? key}) : super(key: key);
 
@@ -189,120 +190,137 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   color: Colors.white,
                 ),
               ),actions:[
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AddToCart()),
-                      );
-                    },
-                    child: Icon(Icons.shopping_cart),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddToCart()),
+                  );
+                },
+                child: Icon(Icons.shopping_cart),
 
-                  ),
-              ],
+              ),
+            ],
             ),
             floatingActionButton:FloatingActionButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed("/dashboard");
-                    showDialog(
-                      context: context,
-                      builder: (context) =>
-                          AlertDialog(
-                            title: Text('Add Item'),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                TextField(
-                                  controller: _nameController,
-                                  decoration: InputDecoration(
-                                    labelText: 'Name',
-                                  ),
-                                ),
-                                TextField(
-                                  controller: _descriptionController,
-                                  decoration: InputDecoration(
-                                    labelText: 'Description',
-                                  ),
-                                ),
-                              ],
+              onPressed: () {
+                Navigator.of(context).pushNamed("/dashboard");
+                showDialog(
+                  context: context,
+                  builder: (context) =>
+                      AlertDialog(
+                        title: Text('Add Item'),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextField(
+                              controller: _nameController,
+                              decoration: InputDecoration(
+                                labelText: 'Name',
+                              ),
                             ),
-                            actions: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  addItem();
-                                },
-                                child: Text('Add'),
+                            TextField(
+                              controller: _descriptionController,
+                              decoration: InputDecoration(
+                                labelText: 'Description',
                               ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text('Cancel'),
-                              ),
-                            ],
+                            ),
+                          ],
+                        ),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              addItem();
+                            },
+                            child: Text('Add'),
                           ),
-                    );
-                  },
-                  child: Icon(Icons.add),
-                  backgroundColor: Color(0xffD64D55),
-                ),
-                body: Stack(
-                children: [
-                  SizedBox(height: 20),
-                  SafeArea(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          ...productVM.productData.map(
-                                (e) =>
-                                Card(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        child: Column(
-                                          children: [
-                                            Text(e.data().name.toString()),
-                                            Text(e.data().description.toString()),
-                                            Row(
-                                                mainAxisAlignment: MainAxisAlignment.end,
-                                                children:[
-                                                  IconButton(
-                                                    onPressed: (){},
-                                                      icon: Icon(Icons.shopping_cart),
-                                                    color: Colors.red,
-                                                  ),
-                                                  IconButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context).pushNamed(
-                                                          "/update-screen", arguments: e.id);
-                                                    },
-                                                    icon: Icon(Icons.edit),
-                                                    color: Colors.black,
-                                                  ),
-                                                  IconButton(
-                                                    onPressed: () {
-                                                      _showDialog(e.id);
-                                                    },
-                                                    icon: Icon(Icons.delete),
-                                                    color: Colors.black,)
-                                                ]
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('Cancel'),
                           ),
                         ],
                       ),
+                );
+              },
+              child: Icon(Icons.add),
+              backgroundColor: Color(0xffD64D55),
+            ),
+            body: Stack(
+              children: [
+                SizedBox(height: 20),
+                SafeArea(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ...productVM.productData.map(
+                              (e) =>
+                              Card(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      child: Column(
+                                        children: [
+                                          Text(e.data().name.toString()),
+                                          Text(e.data().description.toString()),
+                                          Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children:[
+                                                IconButton(
+                                                  onPressed: (){
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext context) {
+                                                        return AlertDialog(
+                                                          title: Text('Success'),
+                                                          content: Text('Product added to cart!'),
+                                                          actions: [
+                                                            TextButton(
+                                                              child: Text('OK'),
+                                                              onPressed: () {
+                                                                Navigator.of(context).pop();
+                                                              },
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  icon: Icon(Icons.shopping_cart),
+                                                  color: Colors.red,
+                                                ),
+                                                IconButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pushNamed(
+                                                        "/update-screen", arguments: e.id);
+                                                  },
+                                                  icon: Icon(Icons.edit),
+                                                  color: Colors.black,
+                                                ),
+                                                IconButton(
+                                                  onPressed: () {
+                                                    _showDialog(e.id);
+                                                  },
+                                                  icon: Icon(Icons.delete),
+                                                  color: Colors.black,)
+                                              ]
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                        ),
+                      ],
                     ),
                   ),
-                  ],
                 ),
+              ],
+            ),
           );
         }
     ); }
 }
-

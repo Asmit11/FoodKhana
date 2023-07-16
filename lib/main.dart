@@ -5,6 +5,7 @@ import 'package:foodkhana/screens/DashBoardScreen.dart';
 import 'package:foodkhana/screens/ForgetScreen.dart';
 import 'package:foodkhana/screens/LoginScreen.dart';
 import 'package:foodkhana/screens/ManagerDashboard.dart';
+import 'package:foodkhana/screens/ManagerLoginScreen.dart';
 import 'package:foodkhana/screens/OrderStatusPage.dart';
 import 'package:foodkhana/screens/SpecialRequest.dart';
 import 'package:foodkhana/services/local_notification_service.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ), //m
-      initialRoute: "/register",
+      initialRoute: "/managerlogin",
       routes: {
         "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
@@ -58,6 +59,8 @@ class MyApp extends StatelessWidget {
         "/addtocart": (context) => AddToCart(),
         "/managerdashboard": (context) => ManagerDashboard(),
         "/specialrequest": (context) => SpecialRequest(),
+        "/managerlogin": (context) => ManagerLoginScreen(),
+
 
 
 
