@@ -47,6 +47,7 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
                 children: [
             IconButton(
             icon: Icon(Icons.cancel),
+            color: Colors.red,
             onPressed: () {
               showDialog(
                 context: context,
