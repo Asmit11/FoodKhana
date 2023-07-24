@@ -15,8 +15,10 @@ class _SettingsState extends State<Settings> {
         appBar: AppBar(
           backgroundColor: Color(0xffD64D55),
           leading: IconButton(onPressed: () {
+            Navigator.of(context).pushNamed("/dashboard");
           },
             icon: const Icon(Icons.arrow_back),),
+
           title: Text("Settings"),),
     );
         }
