@@ -27,6 +27,8 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
     '11:30 AM',
   ];
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +41,35 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
           return ListTile(
             title: Text(orderItems[index]),
             subtitle: Text(orderStatus[index]),
-            trailing: Text(orderStatusTime[index]),
+            leading: Text(orderStatusTime[index]),
+             trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+            IconButton(
+            icon: Icon(Icons.cancel),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Success'),
+                    content: Text('Product added to cart!'),
+                    actions: [
+                      TextButton(
+                        child: Text('OK'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+
+          ],
+          ),
           );
         },
       ),
