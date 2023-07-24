@@ -13,7 +13,7 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xffD64D55),
+          backgroundColor: Colors.red,
           leading: IconButton(onPressed: () {
             Navigator.of(context).pushNamed("/dashboard");
           },

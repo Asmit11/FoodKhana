@@ -47,35 +47,6 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
             title: Text(orderItems[index]),
             subtitle: Text(orderStatus[index]),
             leading: Text(orderStatusTime[index]),
-             trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-            IconButton(
-            icon: Icon(Icons.cancel),
-            color: Colors.red,
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text('Success'),
-                    content: Text('Product added to cart!'),
-                    actions: [
-                      TextButton(
-                        child: Text('OK'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
-
-          ],
-          ),
           );
         },
       ),

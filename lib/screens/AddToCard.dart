@@ -62,6 +62,7 @@ class AddToCart extends StatelessWidget {
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
+
                 IconButton(
                   icon: Icon(Icons.add_shopping_cart),
                   onPressed: () {
@@ -93,6 +94,30 @@ class AddToCart extends StatelessWidget {
                     // Handle favorite button press
                   },
                 ),
+
+                IconButton(
+                  icon: Icon(Icons.cancel),
+                  color: Colors.red,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Success'),
+                          content: Text('Product added to cart!'),
+                          actions: [
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
               ],
             ),
           );
@@ -101,6 +126,8 @@ class AddToCart extends StatelessWidget {
     );
   }
 }
+
+
 
 void main() {
   runApp(MaterialApp(
