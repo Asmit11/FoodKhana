@@ -1,21 +1,10 @@
 import 'package:flutter/material.dart';
-
-class Order {
-  final String id;
-  final String item;
-  final double amount;
-  final DateTime date;
-
-  Order({
-    required this.id,
-    required this.item,
-    required this.amount,
-    required this.date,
-  });
-}
+import 'order.dart';
+import 'edit_order_page.dart';
 
 class OrderHistoryPage extends StatelessWidget {
   final List<Order> orders = [
+    // Sample list of orders. Replace this with your actual data.
     Order(
       id: '1',
       item: 'Cheeseburger',
@@ -53,15 +42,18 @@ class OrderHistoryPage extends StatelessWidget {
               order.date.toString(),
               style: TextStyle(fontSize: 12),
             ),
+            onTap: () {
+              // Navigate to the EditOrderPage to edit the order
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditOrderPage(order: order),
+                ),
+              );
+            },
           );
         },
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: OrderHistoryPage(),
-  ));
 }

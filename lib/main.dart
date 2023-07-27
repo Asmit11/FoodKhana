@@ -5,9 +5,10 @@ import 'package:foodkhana/screens/AddToCard.dart';
 import 'package:foodkhana/screens/DashBoardScreen.dart';
 import 'package:foodkhana/screens/ForgetScreen.dart';
 import 'package:foodkhana/screens/LoginScreen.dart';
+import 'package:foodkhana/screens/order_history_page.dart';
+import 'package:foodkhana/screens/edit_order_page.dart';
 import 'package:foodkhana/screens/ManagerDashboard.dart';
 import 'package:foodkhana/screens/OrderStatusPage.dart';
-import 'package:foodkhana/scree ns/OrderHistory.dart';
 import 'package:foodkhana/services/local_notification_service.dart';
 import 'package:foodkhana/viewmodels/auth_viewmodel.dart';
 import 'package:foodkhana/viewmodels/global_ui_viewmodel.dart';
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ), //m
 
-      initialRoute: "/split-bill",
+      initialRoute: "/orderhistory",
       routes: {
         "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
         "/billing": (context) => BillingScreen(),
         "/payment": (context) => PaymentScreen(totalAmount: 50.0), // Add the route for PaymentScreen
         "/addtocart": (context) => AddToCart(),
+        "/orderhistory":(context) => OrderHistoryPage(),
         "/managerdashboard": (context) => ManagerDashboard(),
     '/split-bill': (context) => SplitBillScreen(splitAmount: 0.0), // Pass a default value here
      },
