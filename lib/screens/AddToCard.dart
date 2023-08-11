@@ -103,8 +103,8 @@ class AddToCart extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text('Success'),
-                          content: Text('Product added to cart!'),
+                          title: Text('Cancel Order'),
+                          content: Text('Are you sure you want to cancel this order?'),
                           actions: [
                             TextButton(
                               child: Text('OK'),
