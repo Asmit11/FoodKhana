@@ -61,18 +61,18 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
       ],
     );
   }
-  // void signOut() async {
-  //   try {
-  //     await _auth.signOut();
-  //     ScaffoldMessenger.of(context)
-  //         .showSnackBar(SnackBar(content: Text("Logged Out")));
-  //   } on FirebaseAuthException catch (err) {
-  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //       content: Text(err.message.toString()),
-  //       backgroundColor: Colors.red,
-  //     ));
-  //   }
-  // }
+  void signOut() async {
+    try {
+      await _auth.signOut();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Logged Out")));
+    } on FirebaseAuthException catch (err) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(err.message.toString()),
+        backgroundColor: Colors.red,
+      ));
+    }
+  }
 
   Future<void> deleteProduct(String id) async {
     try {
@@ -178,8 +178,8 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                           leading: Icon(Icons.logout),
                           iconColor: Colors.red,
                           onTap:(){
-                            Navigator.of(context).pushNamed("/register");
-
+                            signOut();
+                            Navigator.of(context).pushNamed("/login");
                           } ,
                         ),
                       ],
@@ -296,8 +296,6 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
               ],
             ),
           );
-        }
-    ); }
+          }
+        );}
 }
-
-
