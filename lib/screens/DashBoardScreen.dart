@@ -203,52 +203,52 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   ),
               ],
             ),
-            floatingActionButton:FloatingActionButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed("/dashboard");
-                    showDialog(
-                      context: context,
-                      builder: (context) =>
-                          AlertDialog(
-                            title: Text('Add Item'),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                TextField(
-                                  controller: _nameController,
-                                  decoration: InputDecoration(
-                                    labelText: 'Name',
-                                  ),
-                                ),
-                                TextField(
-                                  controller: _descriptionController,
-                                  decoration: InputDecoration(
-                                    labelText: 'Description',
-                                  ),
-                                ),
-                              ],
-                            ),
-                            actions: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  addItem();
-                                },
-                                child: Text('Add'),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text('Cancel'),
-                              ),
-                            ],
-                          ),
-                    );
-                  },
-                  child: Icon(Icons.add),
-                  backgroundColor: Color(0xffD64D55),
-                ),
+            // floatingActionButton:FloatingActionButton(
+            //       onPressed: () {
+            //         Navigator.of(context).pushNamed("/dashboard");
+            //         showDialog(
+            //           context: context,
+            //           builder: (context) =>
+            //               AlertDialog(
+            //                 title: Text('Add Item'),
+            //                 content: Column(
+            //                   mainAxisSize: MainAxisSize.min,
+            //                   children: [
+            //                     TextField(
+            //                       controller: _nameController,
+            //                       decoration: InputDecoration(
+            //                         labelText: 'Name',
+            //                       ),
+            //                     ),
+            //                     TextField(
+            //                       controller: _descriptionController,
+            //                       decoration: InputDecoration(
+            //                         labelText: 'Description',
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //                 actions: [
+            //                   ElevatedButton(
+            //                     onPressed: () {
+            //                       Navigator.of(context).pop();
+            //                       addItem();
+            //                     },
+            //                     child: Text('Add'),
+            //                   ),
+            //                   ElevatedButton(
+            //                     onPressed: () {
+            //                       Navigator.of(context).pop();
+            //                     },
+            //                     child: Text('Cancel'),
+            //                   ),
+            //                 ],
+            //               ),
+            //         );
+            //       },
+            //       child: Icon(Icons.add),
+            //       backgroundColor: Color(0xffD64D55),
+            //     ),
                 body: Stack(
                 children: [
                   SizedBox(height: 20),
@@ -293,20 +293,20 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                                       icon: Icon(Icons.shopping_cart),
                                                     color: Colors.red,
                                                   ),
-                                                  IconButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context).pushNamed(
-                                                          "/update-screen", arguments: e.id);
-                                                    },
-                                                    icon: Icon(Icons.edit),
-                                                    color: Colors.black,
-                                                  ),
-                                                  IconButton(
-                                                    onPressed: () {
-                                                      _showDialog(e.id);
-                                                    },
-                                                    icon: Icon(Icons.delete),
-                                                    color: Colors.black,)
+                                                  // IconButton(
+                                                  //   onPressed: () {
+                                                  //     Navigator.of(context).pushNamed(
+                                                  //         "/update-screen", arguments: e.id);
+                                                  //   },
+                                                  //   icon: Icon(Icons.edit),
+                                                  //   color: Colors.black,
+                                                  // ),
+                                                  // IconButton(
+                                                  //   onPressed: () {
+                                                  //     _showDialog(e.id);
+                                                  //   },
+                                                  //   icon: Icon(Icons.delete),
+                                                  //   color: Colors.black,)
                                                 ]
                                             ),
                                           ],

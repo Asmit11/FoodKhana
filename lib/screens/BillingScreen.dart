@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodkhana/models/CartModel.dart';
 import 'package:foodkhana/repositories/CardRepository.dart';
+import 'package:foodkhana/screens/PrintReceiptScreen.dart';
+import 'package:foodkhana/screens/CustomerFeedback.dart';
 
 class BillingScreen extends StatefulWidget {
   const BillingScreen({Key? key}) : super(key: key);
@@ -34,9 +36,20 @@ class _BillingScreenState extends State<BillingScreen> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pushNamed(context,"/addtocart"); // Navigate back when the back button is pressed
+              Navigator.pushNamed(context, "/addtocart"); // Navigate back when the back button is pressed
             },
           ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CustomerFeedback()),
+                );
+              },
+              child: Text("Feedback"),
+            ),
+          ],
         ),
         body: Column(
           children: [
@@ -80,6 +93,15 @@ class _BillingScreenState extends State<BillingScreen> {
                     children: [
                       Text("Total Items: $total"),
                       Text("Total Price: \$${total_price.toStringAsFixed(2)}"),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PrintReceiptScreen()),
+                          );
+                        },
+                        child: Icon(Icons.print),
+                      ),
                     ],
                   ),
                 );

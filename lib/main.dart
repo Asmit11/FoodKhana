@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:foodkhana/screens/AddToCard.dart';
+import 'package:foodkhana/screens/CustomerFeedback.dart';
 import 'package:foodkhana/screens/DashBoardScreen.dart';
 import 'package:foodkhana/screens/ForgetScreen.dart';
 import 'package:foodkhana/screens/LoginScreen.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ), //m
-      initialRoute: "/login",
+      initialRoute: "/managerdashboard",
       routes: {
         "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
         "/addtocart": (context) => AddToCart(),
         "/managerdashboard": (context) => ManagerDashboard(),
         "/printreceipt": (context) => PrintReceiptScreen(),
+        "/feedback": (context) => CustomerFeedback(),
 
 
 
