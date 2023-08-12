@@ -22,6 +22,26 @@ class _EditOrderPageState extends State<EditOrderPage> {
     _amountController.text = widget.order.amount.toString();
     _selectedDate = widget.order.date;
   }
+  // Add the _showSuccessDialog method here
+  Future<void> _showSuccessDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Success'),
+          content: Text('Order saved successfully!'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +92,8 @@ class _EditOrderPageState extends State<EditOrderPage> {
 
                 // You can update the order in your database here
 
-                // Go back to the previous screen after saving
-                Navigator.pop(context);
+                // Show a successful dialog box
+                _showSuccessDialog(context);
               },
               child: Text('Save'),
             ),

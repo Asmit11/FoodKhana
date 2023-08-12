@@ -56,7 +56,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
               onPressed: () {
                 // Call a function to handle password update here
                 // You may want to implement a function that communicates with your backend to update the password
-                _updatePassword();
+                _updatePassword(context);
               },
               child: Text('Update Password'),
             ),
@@ -66,13 +66,32 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
     );
   }
 
-  void _updatePassword() {
+  void _updatePassword(BuildContext context) {
     if (_newPasswordController.text == _confirmPasswordController.text) {
       // Passwords match, update the password logic here
       String newPassword = _newPasswordController.text;
       // Call your API or database update function to update the password
       print('New Password: $newPassword');
-      // You may want to show a success message and navigate back to the previous screen after successful update
+
+      // Show a dialog box indicating success
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Password Update Successful'),
+            content: Text('Your password has been updated successfully.'),
+            actions: <Widget>[
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  // You can navigate back to the previous screen here if needed
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     } else {
       // Passwords don't match
       setState(() {

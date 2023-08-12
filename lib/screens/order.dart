@@ -1,8 +1,8 @@
 class Order {
   final String id;
-  String item; // Remove final
-  double amount; // Remove final
-  DateTime date; // Remove final
+  String item;
+  double amount;
+  DateTime date;
 
   Order({
     required this.id,
@@ -10,4 +10,13 @@ class Order {
     required this.amount,
     required this.date,
   });
+
+  factory Order.example() {
+    return Order(
+      id: '1',
+      item: 'Example Item',
+      amount: 100.0,
+      date: DateTime.now(),
+    );
+  }
 }
