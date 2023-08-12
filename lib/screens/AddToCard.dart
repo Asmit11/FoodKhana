@@ -32,6 +32,10 @@ class Cart {
       items.add(CartItem(product: product));
     }
   }
+
+  void removeFromCart(Product product) {
+    items.removeWhere((item) => item.product.name == product.name);
+  }
 }
 
 class AddToCart extends StatelessWidget {
@@ -41,6 +45,7 @@ class AddToCart extends StatelessWidget {
     Product(name: 'Momo', price:120),
     Product(name: 'Pizza', price: 800),
   ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,23 +76,13 @@ class AddToCart extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text('Confirmation'),
-                          content: Text('Are you sure you want to cancel this order?'),
+                          title: Text('Success'),
+                          content: Text('Product added to cart!'),
                           actions: [
-                            ElevatedButton(
-                              child: Text('No'),
+                            TextButton(
+                              child: Text('OK'),
                               onPressed: () {
-                                Navigator.of(context).pop(false); // Return false when "No" is pressed
-                              },
-                            ),
-                            ElevatedButton(
-                              child: Text('Yes'),
-                              onPressed: () {
-                                Navigator.of(context).pushNamed("/dashboard");
-                                final snackBar = SnackBar(
-                                  content: Text('The order has been cancelled successfully'),
-                                );
-                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                Navigator.of(context).pop();
                               },
                             ),
                           ],
@@ -113,13 +108,25 @@ class AddToCart extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text('Cancel Order'),
-                          content: Text('Are you sure you want to cancel this order?'),
+                          title: Text('Confirmation'),
+                          content: Text('Are you sure you want to cancel the order?'),
                           actions: [
-                            TextButton(
-                              child: Text('OK'),
+                            ElevatedButton(
+                              child: Text('No'),
                               onPressed: () {
-                                Navigator.of(context).pop();
+                                Navigator.of(context).pop(false);
+                              },
+                            ),
+
+                            ElevatedButton(
+                              child: Text('Yes'),
+                              onPressed: () {
+                                cart.removeFromCart(product); // Remove the product from the cart
+                                Navigator.of(context).pop(); // Close the dialog
+                                final snackBar = SnackBar(
+                                  content: Text('Your order has been cancelled successfully'),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               },
                             ),
                           ],

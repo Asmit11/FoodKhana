@@ -9,6 +9,9 @@ import 'package:foodkhana/screens/ManagerLoginScreen.dart';
 import 'package:foodkhana/screens/OrderStatusPage.dart';
 import 'package:foodkhana/screens/Settings.dart';
 import 'package:foodkhana/screens/SpecialRequest.dart';
+import 'package:foodkhana/screens/StaffLogin.dart';
+import 'package:foodkhana/screens/UpdateProduct.dart';
+import 'package:foodkhana/screens/ViewProfile.dart';
 import 'package:foodkhana/services/local_notification_service.dart';
 import 'package:foodkhana/viewmodels/auth_viewmodel.dart';
 import 'package:foodkhana/viewmodels/global_ui_viewmodel.dart';
@@ -58,17 +61,13 @@ class MyApp extends StatelessWidget {
         "/orderstatus": (context) => OrderStatusPage(),
         "/billing": (context) => BillingScreen(),
         "/addtocart": (context) => AddToCart(),
+        "/updateproduct": (context)=> UpdateProduct(),
         "/managerdashboard": (context) => ManagerDashboard(),
         "/specialrequest": (context) => SpecialRequest(),
         "/managerlogin": (context) => ManagerLoginScreen(),
+        "/viewprofile": (context) => ViewProfile(),
         "/settings": (context) => Settings(),
-
-
-
-
-
-
-
+        "/stafflogin": (context)=>StaffLoginScreen(),
       },
     ),
     );

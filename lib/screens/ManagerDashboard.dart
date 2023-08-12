@@ -269,7 +269,7 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                                                 IconButton(
                                                   onPressed: () {
                                                     Navigator.of(context).pushNamed(
-                                                        "/update-screen", arguments: e.id);
+                                                        "/updateproduct", arguments: e.id);
                                                   },
                                                   icon: Icon(Icons.edit),
                                                   color: Colors.black,
