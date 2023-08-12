@@ -27,6 +27,12 @@ class PrintReceiptScreenState extends State<PrintReceiptScreen> {
               TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text('OK'),
+
+              ),TextButton(
+                child: const Text('Complete Order'),
+                onPressed: () {
+                  Navigator.of(context).pushNamed("/dashboard");
+                },
               ),
             ],
           );

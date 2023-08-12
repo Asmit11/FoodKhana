@@ -32,6 +32,12 @@ class _AddToCartState extends State<AddToCart> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Add to Cart'),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamed(context, "/dashboard");
+            },
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(
