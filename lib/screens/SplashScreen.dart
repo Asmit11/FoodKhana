@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   late AuthViewModel _authViewModel;
 
   void checkLogin() async{
-    await Future.delayed(Duration(seconds: 10));
+    await Future.delayed(Duration(seconds: 5));
     // check for user detail first
     try{
       await _authViewModel.checkLogin();
@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Image.asset("assets/images/Foodkhanalogo.png"),
+              Image.asset("assets/images/Foodkhanalogo.gif"),
               SizedBox(height: 100,),
               Text("FoodKhana", style: TextStyle(
                 fontSize: 22, fontStyle:FontStyle.italic,
