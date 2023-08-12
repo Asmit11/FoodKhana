@@ -79,7 +79,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 children: [
                   Image.asset(
-                    "assets/images/logo.png",
+                    "assets/images/Foodkhanalogo.png",
                     height: 100,
                     width: 100,
                   ),
@@ -304,9 +304,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),),
                       InkWell(
                           onTap: (){
-                            Navigator.of(context).pop();
+                            Navigator.of(context).pushNamed("/login");
                           },
-                          child: Text("Sign in", style: TextStyle(color: Colors.blue),))
+                          child: Text("Sign in", style: TextStyle(color: Colors.red),))
                     ],
                   ),
 

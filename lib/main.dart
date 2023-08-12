@@ -12,6 +12,7 @@ import 'package:foodkhana/services/local_notification_service.dart';
 import 'package:foodkhana/viewmodels/auth_viewmodel.dart';
 import 'package:foodkhana/viewmodels/global_ui_viewmodel.dart';
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
+import 'package:foodkhana/screens/SplashScreen.dart';
 import 'package:provider/provider.dart';
 import 'screens/BillingScreen.dart';
 import 'screens/RegisterScreen.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ), //m
-      initialRoute: "/managerdashboard",
+      initialRoute: "/splash",
       routes: {
         "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
         "/managerdashboard": (context) => ManagerDashboard(),
         "/printreceipt": (context) => PrintReceiptScreen(),
         "/feedback": (context) => CustomerFeedback(),
+        "/splash": (context)=> SplashScreen(),
 
 
 
