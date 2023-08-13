@@ -115,6 +115,32 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       ),
     );
   }
+  void _showLogoutDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Logout'),
+          content: Text('Are you sure you want to exit?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('No'), // Close the dialog
+            ),
+            TextButton(
+              onPressed: () {
+                signOut(context); // Perform logout
+              },
+              child: Text('Yes'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   Future<void> addItem() async {
     try {
@@ -153,6 +179,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             Navigator.of(context).pushNamed("/viewprofile");
                           } ,
                         ),
+                        ListTile(
+                          title: Text('Switch to ManagerDashboard'),
+                          leading: Icon(Icons.switch_account),
+                          onTap:(){
+                            Navigator.of(context).pushNamed("/managerdashboard");
+                          },
+                        ),
+
 
                         ListTile(
                           title: Text('Order Status'),
@@ -176,7 +210,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           leading: Icon(Icons.logout),
                           iconColor: Colors.red,
                           onTap:(){
-                            signOut(context);
+                            _showLogoutDialog() ;
 
                           } ,
                         ),
@@ -206,6 +240,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   ),
               ],
             ),
+
             // floatingActionButton:FloatingActionButton(
             //       onPressed: () {
             //         Navigator.of(context).pushNamed("/dashboard");
@@ -269,6 +304,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                           children: [
                                             Text(e.data().name.toString()),
                                             Text(e.data().description.toString()),
+
                                             Row(
                                                 mainAxisAlignment: MainAxisAlignment.end,
                                                 children:[

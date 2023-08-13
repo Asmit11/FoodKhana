@@ -1,3 +1,5 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodkhana/models/FeedbackModel.dart';
 
@@ -6,11 +8,13 @@ class CustomerFeedbackRepository {
 
   Future<void> saveFeedback(FeedbackModel feedback) async {
     try {
-      // Create a new document in the "feedbacks" collection and set its data.
+
       await _firestore.collection('feedbacks').add({
+
         'rating': feedback.rating,
         'comment': feedback.comment,
-        'timestamp': FieldValue.serverTimestamp(), // Optional: Store the server timestamp
+        'timestamp': FieldValue.serverTimestamp(),
+
       });
     } catch (e) {
       // Handle any errors that occurred during the process.
@@ -19,3 +23,4 @@ class CustomerFeedbackRepository {
     }
   }
 }
+

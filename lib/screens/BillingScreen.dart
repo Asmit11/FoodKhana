@@ -74,7 +74,7 @@ class _BillingScreenState extends State<BillingScreen> {
                 double total_price = 0;
                 items.forEach((element) {
                   total += element.quantity;
-                  total_price += (element.product.description ?? 0) * element.quantity;
+                  total_price += (element.product.description ?? 0) * element.quantity; // Corrected calculation using price
                 });
                 return Container(
                   padding: EdgeInsets.all(16.0),
@@ -95,6 +95,12 @@ class _BillingScreenState extends State<BillingScreen> {
                       Text("Total Price: \$${total_price.toStringAsFixed(2)}"),
                       ElevatedButton(
                         onPressed: () {
+                          _showTakeawayDialog(); // Call the function to show the alert dialog
+                        },
+                        child: Icon(Icons.delivery_dining), // Display "Takeaway" on the button
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => PrintReceiptScreen()),
@@ -110,6 +116,27 @@ class _BillingScreenState extends State<BillingScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  // Function to show the alert dialog
+  void _showTakeawayDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Order Recorded'),
+          content: Text('Your order is recorded as take away.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

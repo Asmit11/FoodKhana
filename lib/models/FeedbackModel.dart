@@ -1,4 +1,5 @@
 class FeedbackModel {
+
   final int rating;
   final String comment;
 
@@ -6,6 +7,7 @@ class FeedbackModel {
 
   toJson(){
     return{
+
     "rating": rating,
     "comment": comment,
     };

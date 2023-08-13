@@ -31,7 +31,7 @@ class PrintReceiptScreenState extends State<PrintReceiptScreen> {
               ),TextButton(
                 child: const Text('Complete Order'),
                 onPressed: () {
-                  Navigator.of(context).pushNamed("/dashboard");
+                 _showcompleteorderDialog();
                 },
               ),
             ],
@@ -89,6 +89,25 @@ class PrintReceiptScreenState extends State<PrintReceiptScreen> {
         },
       );
     }
+  }
+  void _showcompleteorderDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Order Complete'),
+          content: Text('Your order is completed,Thank you!'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed("/dashboard"); // Close the dialog
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override

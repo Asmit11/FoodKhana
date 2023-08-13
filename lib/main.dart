@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:foodkhana/models/FeedbackModel.dart';
 import 'package:foodkhana/screens/AddToCard.dart';
 import 'package:foodkhana/screens/CustomerFeedback.dart';
 import 'package:foodkhana/screens/DashBoardScreen.dart';
+import 'package:foodkhana/screens/EditFeedbackScreen.dart';
 import 'package:foodkhana/screens/ForgetScreen.dart';
 import 'package:foodkhana/screens/LoginScreen.dart';
 import 'package:foodkhana/screens/ManagerDashboard.dart';
@@ -17,6 +19,8 @@ import 'package:provider/provider.dart';
 import 'screens/BillingScreen.dart';
 import 'screens/RegisterScreen.dart';
 import 'firebase_options.dart';
+
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,11 +40,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
+
         ChangeNotifierProvider(create: (_)=>ProductViewModel()),
         ChangeNotifierProvider(create: (_)=>AuthViewModel()),
         ChangeNotifierProvider(create: (_)=>GlobalUIViewModel())
     ],
     child: MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.red,
@@ -58,12 +64,15 @@ class MyApp extends StatelessWidget {
         "/printreceipt": (context) => PrintReceiptScreen(),
         "/feedback": (context) => CustomerFeedback(),
         "/splash": (context)=> SplashScreen(),
+        "editfeedback": (context)=> EditFeedbackScreen(),
+        },
 
 
 
 
 
-      },
+
+
     ),
     );
   }

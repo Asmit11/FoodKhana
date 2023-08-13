@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodkhana/models/FeedbackModel.dart';
-import 'package:foodkhana/repositories/FeedbackRepository.dart';
+import 'package:foodkhana/repositories/CustomerFeedbackRepository.dart';
 import 'package:foodkhana/screens/DashBoardScreen.dart';
+import 'package:foodkhana/screens/EditFeedbackScreen.dart';
 
 class CustomerFeedback extends StatefulWidget {
   @override
@@ -30,12 +31,12 @@ class _CustomerFeedbackState extends State<CustomerFeedback> {
             actions: [
               TextButton(
                 onPressed: ()
-          {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => DashBoardScreen()),
-            );
-          },
+                {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => DashBoardScreen()),
+                  );
+                },
                 child: Text('OK'),
               ),
             ],
@@ -69,8 +70,27 @@ class _CustomerFeedbackState extends State<CustomerFeedback> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Customer Feedback'),
+        title:  Text('Customer Feedback'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushNamed(context, "/billing"); // Navigate back when the back button is pressed
+          },
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EditFeedbackScreen()),
+              );
+            },
+            child: Icon(Icons.edit),
+          ),
+        ],
+
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
