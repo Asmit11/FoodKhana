@@ -61,6 +61,7 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
       ],
     );
   }
+<<<<<<< HEAD
   void signOut() async {
     try {
       await _auth.signOut();
@@ -73,6 +74,20 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
       ));
     }
   }
+=======
+  // void signOut() async {
+  //   try {
+  //     await _auth.signOut();
+  //     ScaffoldMessenger.of(context)
+  //         .showSnackBar(SnackBar(content: Text("Logged Out")));
+  //   } on FirebaseAuthException catch (err) {
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //       content: Text(err.message.toString()),
+  //       backgroundColor: Colors.red,
+  //     ));
+  //   }
+  // }
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
 
   Future<void> deleteProduct(String id) async {
     try {
@@ -178,8 +193,13 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                           leading: Icon(Icons.logout),
                           iconColor: Colors.red,
                           onTap:(){
+<<<<<<< HEAD
                             signOut();
                             Navigator.of(context).pushNamed("/login");
+=======
+                            Navigator.of(context).pushNamed("/register");
+
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
                           } ,
                         ),
                       ],
@@ -269,7 +289,11 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                                                 IconButton(
                                                   onPressed: () {
                                                     Navigator.of(context).pushNamed(
+<<<<<<< HEAD
                                                         "/updateproduct", arguments: e.id);
+=======
+                                                        "/update-screen", arguments: e.id);
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
                                                   },
                                                   icon: Icon(Icons.edit),
                                                   color: Colors.black,
@@ -296,6 +320,11 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
               ],
             ),
           );
+<<<<<<< HEAD
           }
         );}
+=======
+        }
+    ); }
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
 }

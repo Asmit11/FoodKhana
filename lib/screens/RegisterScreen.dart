@@ -55,7 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           title: "Welcome to this app",
           body: "Hello ${_authViewModel.loggedInUser?.name},\n Thank you for registering in this application.",
         );
-        Navigator.of(context).pushReplacementNamed("/dashboard");
+        Navigator.of(context).pushReplacementNamed("/login");
       })
           .catchError((e){
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message.toString())));
@@ -80,8 +80,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   Image.asset(
                     "assets/images/Foodkhanalogo.png",
+<<<<<<< HEAD
                     height: 200,
                     width: 200,
+=======
+                    height: 100,
+                    width: 100,
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
                   ),
                   SizedBox(height: 10,),
                   TextFormField(
