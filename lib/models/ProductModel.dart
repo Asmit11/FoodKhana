@@ -2,6 +2,8 @@
 //
 //     final productModel = productModelFromJson(jsonString);
 
+
+
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,47 +13,31 @@ ProductModel productModelFromJson(String str) => ProductModel.fromJson(json.deco
 String productModelToJson(ProductModel data) => json.encode(data.toJson());
 
 class ProductModel {
-  final String? username;
-  final String? email;
-  final String? address;
-  final int? phone;
-  final String? gender;
-  final String? name;
-  final String? description;
+  String? name;
+  double? description;
+  String? id;
 
   ProductModel({
-    required this.username,
-    required this.email,
-    required this.address,
-    required this.phone,
-    required this.gender,
-    required this.name,
-    required this.description,
+    this.name,
+    this.id,
+    this.description,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-      username: json["username"],
-      email: json["email"],
-      address: json["address"],
-      phone: json["phone"],
-      gender: json["gender"],
-      name: json["name"],
-      description: json["description"]
+    name: json["name"],
+    description: json["description"]?.toDouble(),
+    id: json["id"],
   );
 
   factory ProductModel.fromFirebaseSnapshot(DocumentSnapshot doc){
-    final data = doc.data() as Map<String, dynamic>;
-    data["id"]=doc.id;
+    final data = doc.data()! as Map<String, dynamic>;
+    data["id"] = doc.id;
     return ProductModel.fromJson(data);
   }
 
   Map<String, dynamic> toJson() => {
-    "username": username,
-    "email": email,
-    "address": address,
-    "phone": phone,
-    "gender": gender,
+    "id": id,
     "name": name,
-    "description": description
+    "description": description,
   };
 }

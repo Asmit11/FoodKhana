@@ -6,6 +6,8 @@ import 'package:foodkhana/repositories/ProductRepository.dart';
 import 'package:foodkhana/screens/AddToCard.dart';
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
 import 'package:provider/provider.dart';
+import '../repositories/CardRepository.dart';
+
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({Key? key}) : super(key: key);
@@ -62,18 +64,21 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       ],
     );
   }
-  // void signOut() async {
-  //   try {
-  //     await _auth.signOut();
-  //     ScaffoldMessenger.of(context)
-  //         .showSnackBar(SnackBar(content: Text("Logged Out")));
-  //   } on FirebaseAuthException catch (err) {
-  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //       content: Text(err.message.toString()),
-  //       backgroundColor: Colors.red,
-  //     ));
-  //   }
-  // }
+  void signOut(BuildContext context) async {
+    try {
+      await _auth.signOut();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Logged Out")));
+      Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
+    } on FirebaseAuthException catch (err) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(err.message.toString()),
+        backgroundColor: Colors.red,
+      ));
+    }
+  }
+
+
 
   Future<void> deleteProduct(String id) async {
     try {
@@ -110,6 +115,32 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       ),
     );
   }
+  void _showLogoutDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Logout'),
+          content: Text('Are you sure you want to exit?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('No'), // Close the dialog
+            ),
+            TextButton(
+              onPressed: () {
+                signOut(context); // Perform logout
+              },
+              child: Text('Yes'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   Future<void> addItem() async {
     try {
@@ -148,6 +179,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             Navigator.of(context).pushNamed("/viewprofile");
                           } ,
                         ),
+                        ListTile(
+                          title: Text('Switch to ManagerDashboard'),
+                          leading: Icon(Icons.switch_account),
+                          onTap:(){
+                            Navigator.of(context).pushNamed("/managerdashboard");
+                          },
+                        ),
+
 
                         ListTile(
                           title: Text('Order Status'),
@@ -171,7 +210,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           leading: Icon(Icons.logout),
                           iconColor: Colors.red,
                           onTap:(){
-                            Navigator.of(context).pushNamed("/register");
+                            _showLogoutDialog() ;
 
                           } ,
                         ),
@@ -201,52 +240,53 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   ),
               ],
             ),
-            floatingActionButton:FloatingActionButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed("/dashboard");
-                    showDialog(
-                      context: context,
-                      builder: (context) =>
-                          AlertDialog(
-                            title: Text('Add Item'),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                TextField(
-                                  controller: _nameController,
-                                  decoration: InputDecoration(
-                                    labelText: 'Name',
-                                  ),
-                                ),
-                                TextField(
-                                  controller: _descriptionController,
-                                  decoration: InputDecoration(
-                                    labelText: 'Description',
-                                  ),
-                                ),
-                              ],
-                            ),
-                            actions: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  addItem();
-                                },
-                                child: Text('Add'),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text('Cancel'),
-                              ),
-                            ],
-                          ),
-                    );
-                  },
-                  child: Icon(Icons.add),
-                  backgroundColor: Color(0xffD64D55),
-                ),
+
+            // floatingActionButton:FloatingActionButton(
+            //       onPressed: () {
+            //         Navigator.of(context).pushNamed("/dashboard");
+            //         showDialog(
+            //           context: context,
+            //           builder: (context) =>
+            //               AlertDialog(
+            //                 title: Text('Add Item'),
+            //                 content: Column(
+            //                   mainAxisSize: MainAxisSize.min,
+            //                   children: [
+            //                     TextField(
+            //                       controller: _nameController,
+            //                       decoration: InputDecoration(
+            //                         labelText: 'Name',
+            //                       ),
+            //                     ),
+            //                     TextField(
+            //                       controller: _descriptionController,
+            //                       decoration: InputDecoration(
+            //                         labelText: 'Description',
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //                 actions: [
+            //                   ElevatedButton(
+            //                     onPressed: () {
+            //                       Navigator.of(context).pop();
+            //                       addItem();
+            //                     },
+            //                     child: Text('Add'),
+            //                   ),
+            //                   ElevatedButton(
+            //                     onPressed: () {
+            //                       Navigator.of(context).pop();
+            //                     },
+            //                     child: Text('Cancel'),
+            //                   ),
+            //                 ],
+            //               ),
+            //         );
+            //       },
+            //       child: Icon(Icons.add),
+            //       backgroundColor: Color(0xffD64D55),
+            //     ),
                 body: Stack(
                 children: [
                   SizedBox(height: 20),
@@ -264,28 +304,48 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                           children: [
                                             Text(e.data().name.toString()),
                                             Text(e.data().description.toString()),
+
                                             Row(
                                                 mainAxisAlignment: MainAxisAlignment.end,
                                                 children:[
                                                   IconButton(
-                                                    onPressed: (){},
+                                                    onPressed: (){
+                                                      CartRepository().addToCart(e.data());
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext context) {
+                                                          return AlertDialog(
+                                                            title: Text('Success'),
+                                                            content: Text('Product added to cart!'),
+                                                            actions: [
+                                                              TextButton(
+                                                                child: Text('OK'),
+                                                                onPressed: () {
+                                                                  Navigator.of(context).pop();
+                                                                },
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
+                                                      );
+                                                    },
                                                       icon: Icon(Icons.shopping_cart),
                                                     color: Colors.red,
                                                   ),
-                                                  IconButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context).pushNamed(
-                                                          "/update-screen", arguments: e.id);
-                                                    },
-                                                    icon: Icon(Icons.edit),
-                                                    color: Colors.black,
-                                                  ),
-                                                  IconButton(
-                                                    onPressed: () {
-                                                      _showDialog(e.id);
-                                                    },
-                                                    icon: Icon(Icons.delete),
-                                                    color: Colors.black,)
+                                                  // IconButton(
+                                                  //   onPressed: () {
+                                                  //     Navigator.of(context).pushNamed(
+                                                  //         "/update-screen", arguments: e.id);
+                                                  //   },
+                                                  //   icon: Icon(Icons.edit),
+                                                  //   color: Colors.black,
+                                                  // ),
+                                                  // IconButton(
+                                                  //   onPressed: () {
+                                                  //     _showDialog(e.id);
+                                                  //   },
+                                                  //   icon: Icon(Icons.delete),
+                                                  //   color: Colors.black,)
                                                 ]
                                             ),
                                           ],

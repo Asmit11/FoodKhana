@@ -57,7 +57,7 @@ class ProductRepository{
     try {
           await FirebaseFirestore.instance.collection('products').add({
             'name': name,
-            'description': description,
+            'description': double.parse(description),
           });
         } catch (e) {
           throw e;

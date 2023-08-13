@@ -55,7 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           title: "Welcome to this app",
           body: "Hello ${_authViewModel.loggedInUser?.name},\n Thank you for registering in this application.",
         );
-        Navigator.of(context).pushReplacementNamed("/dashboard");
+        Navigator.of(context).pushReplacementNamed("/login");
       })
           .catchError((e){
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message.toString())));
@@ -304,9 +304,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),),
                       InkWell(
                           onTap: (){
-                            Navigator.of(context).pop();
+                            Navigator.of(context).pushNamed("/login");
                           },
-                          child: Text("Sign in", style: TextStyle(color: Colors.blue),))
+                          child: Text("Sign in", style: TextStyle(color: Colors.red),))
                     ],
                   ),
 

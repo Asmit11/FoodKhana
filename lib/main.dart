@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
           "/managerdashboard": (context) => ManagerDashboard(),
           '/split-bill': (context) => SplitBillScreen(splitAmount: 0.0),
           "/updatepassword": (context) => UpdatePasswordScreen(),
-         // Use Order.example() to initialize
+          // Use Order.example() to initialize
         },
       ),
     );

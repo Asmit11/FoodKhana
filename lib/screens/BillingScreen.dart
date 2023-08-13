@@ -1,154 +1,142 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:foodkhana/screens/OrderStatusPage.dart';
+import 'package:foodkhana/models/CartModel.dart';
+import 'package:foodkhana/repositories/CardRepository.dart';
+import 'package:foodkhana/screens/PrintReceiptScreen.dart';
+import 'package:foodkhana/screens/CustomerFeedback.dart';
 
-class BillingScreen extends StatelessWidget {
+class BillingScreen extends StatefulWidget {
+  const BillingScreen({Key? key}) : super(key: key);
+
+  @override
+  State<BillingScreen> createState() => _BillingScreenState();
+}
+
+class _BillingScreenState extends State<BillingScreen> {
+  List<CartItem> items = [];
+
+  @override
+  void initState() {
+    getCartItems();
+    super.initState();
+  }
+
+  Future<void> getCartItems() async {
+    final response = await CartRepository().getCart();
+    setState(() {
+      items = response.items;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Billing'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Billing'),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => OrderStatusPage(),
-                ),
-              );
+              Navigator.pushNamed(context, "/addtocart"); // Navigate back when the back button is pressed
             },
           ),
-        ],
-      ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('cart').snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
-          }
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          List<Product> products = snapshot.data!.docs.map((doc) {
-            return Product(
-              name: doc['name'],
-              price: doc['price'],
-              quantity: doc['quantity'],
-            );
-          }).toList();
-
-          return Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Order Summary',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 16),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        elevation: 4,
-                        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                        child: Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                products[index].name,
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Price: \$${products[index].price.toStringAsFixed(2)} | Quantity: ${products[index].quantity}',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(height: 16),
-                Divider(height: 1, color: Colors.grey),
-                SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Total Amount:',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      '\$${calculateTotalAmount(products).toStringAsFixed(2)}',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ],
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CustomerFeedback()),
+                );
+              },
+              child: Text("Feedback"),
             ),
-          );
-        },
+          ],
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final e = items[index];
+                  return Card(
+                    child: ListTile(
+                      title: Text(e.product.name.toString()),
+                      subtitle: Text(e.product.description.toString()),
+                      trailing: Text(e.quantity.toString()),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Builder(
+              builder: (context) {
+                int total = 0;
+                double total_price = 0;
+                items.forEach((element) {
+                  total += element.quantity;
+                  total_price += (element.product.description ?? 0) * element.quantity; // Corrected calculation using price
+                });
+                return Container(
+                  padding: EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 5.0,
+                        offset: Offset(0, -3),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Total Items: $total"),
+                      Text("Total Price: \$${total_price.toStringAsFixed(2)}"),
+                      ElevatedButton(
+                        onPressed: () {
+                          _showTakeawayDialog(); // Call the function to show the alert dialog
+                        },
+                        child: Icon(Icons.delivery_dining), // Display "Takeaway" on the button
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PrintReceiptScreen()),
+                          );
+                        },
+                        child: Icon(Icons.print),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  double calculateTotalAmount(List<Product> products) {
-    double total = 0;
-    for (var product in products) {
-      total += product.price * product.quantity;
-    }
-    return total;
-  }
-
-  void showOrderStatusDialog(BuildContext context) {
+  // Function to show the alert dialog
+  void _showTakeawayDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Order Status'),
-          content: Text("You'll be transferred to the order status"),
+          title: Text('Order Recorded'),
+          content: Text('Your order is recorded as take away.'),
           actions: [
             TextButton(
-              child: Text('OK'),
               onPressed: () {
-                Navigator.of(context).pushNamed("/orderstatus");
+                Navigator.of(context).pop(); // Close the dialog
               },
+              child: Text('OK'),
             ),
           ],
         );
       },
     );
   }
-}
-
-class Product {
-  final String name;
-  final double price;
-  final int quantity;
-
-  Product({required this.name, required this.price, required this.quantity});
-}
-
-
-
-void main() {
-  runApp(MaterialApp(
-    title: 'Billing App',
-    home: BillingScreen(),
-  ));
 }
