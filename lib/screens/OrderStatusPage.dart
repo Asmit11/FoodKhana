@@ -27,19 +27,26 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
     '11:30 AM',
   ];
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Order Status'),
+        leading: IconButton(onPressed: () {
+          Navigator.of(context).pushNamed("/dashboard");
+        },
+          icon: const Icon(Icons.arrow_back),),
       ),
+
       body: ListView.builder(
         itemCount: orderItems.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             title: Text(orderItems[index]),
             subtitle: Text(orderStatus[index]),
-            trailing: Text(orderStatusTime[index]),
+            leading: Text(orderStatusTime[index]),
           );
         },
       ),

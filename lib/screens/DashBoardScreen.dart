@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../repositories/CardRepository.dart';
 
 
+
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({Key? key}) : super(key: key);
 
@@ -64,12 +65,19 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       ],
     );
   }
+<<<<<<< HEAD
+  void signOut() async {
+=======
   void signOut(BuildContext context) async {
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
     try {
       await _auth.signOut();
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Logged Out")));
+<<<<<<< HEAD
+=======
       Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
     } on FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(err.message.toString()),
@@ -77,8 +85,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       ));
     }
   }
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
 
   Future<void> deleteProduct(String id) async {
     try {
@@ -189,6 +200,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
 
                         ListTile(
+                          title: Text('Switch to Manager'),
+                          leading: Icon(Icons.switch_account),
+                          onTap:(){
+                            Navigator.of(context).pushNamed("/managerlogin");
+                          },
+                        ),
+
+
+                        ListTile(
                           title: Text('Order Status'),
                           leading: Icon(Icons.cabin),
                           onTap:(){
@@ -200,18 +220,67 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           title: Text('Settings'),
                           leading: Icon(Icons.settings),
                           onTap:(){
+                            Navigator.of(context).pushNamed("/settings");
 
                           } ,
                         ),
 
+                        ListTile(
+                          title: Text('Delete Profile'),
+                          textColor: Colors.red,
+                          leading: Icon(Icons.delete),
+                          iconColor: Colors.red,
+                          onTap:(){
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Confirmation'),
+                                  content: Text('Are you sure you want to delete the account?'),
+                                  actions: [
+                                    ElevatedButton(
+                                      child: Text('No'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop(false); // Return false when "No" is pressed
+                                      },
+                                    ),
+                                    ElevatedButton(
+                                      child: Text('Yes'),
+                                      onPressed: () {
+                                        Navigator.of(context).pushNamed("/register");
+                                        final snackBar = SnackBar(
+                                          content: Text('Your account has been deleted successfully'),
+                                        );
+                                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            ).then((value) {
+                              if (value != null && value) {
+                                // User pressed "Yes"
+                                // Do something here
+                              } else {
+                                // User pressed "No" or dialog was dismissed
+                                // Do something here
+                              }
+                            });
+                          } ,
+                        ),
                         ListTile(
                           title: Text('Logout'),
                           textColor: Colors.red,
                           leading: Icon(Icons.logout),
                           iconColor: Colors.red,
                           onTap:(){
+<<<<<<< HEAD
+                            signOut();
+                            Navigator.of(context).pushNamed("/login");
+=======
                             _showLogoutDialog() ;
 
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
                           } ,
                         ),
                       ],
@@ -228,18 +297,58 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   color: Colors.white,
                 ),
               ),actions:[
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AddToCart()),
-                      );
-                    },
-                    child: Icon(Icons.shopping_cart),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddToCart()),
+                  );
+                },
+                child: Icon(Icons.shopping_cart),
 
-                  ),
-              ],
+              ),
+            ],
             ),
+<<<<<<< HEAD
+            floatingActionButton:FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed("/dashboard");
+                showDialog(
+                  context: context,
+                  builder: (context) =>
+                      AlertDialog(
+                        title: Text('Add Item'),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextField(
+                              controller: _nameController,
+                              decoration: InputDecoration(
+                                labelText: 'Name',
+                              ),
+                            ),
+                            TextField(
+                              controller: _descriptionController,
+                              decoration: InputDecoration(
+                                labelText: 'Description',
+                              ),
+                            ),
+                          ],
+                        ),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              addItem();
+                            },
+                            child: Text('Add'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('Cancel'),
+=======
 
             // floatingActionButton:FloatingActionButton(
             //       onPressed: () {
@@ -354,15 +463,74 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                     ],
                                   ),
                                 ),
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
                           ),
                         ],
                       ),
+                );
+              },
+              child: Icon(Icons.add),
+              backgroundColor: Color(0xffD64D55),
+            ),
+            body: Stack(
+              children: [
+                SizedBox(height: 20),
+                SafeArea(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ...productVM.productData.map(
+                              (e) =>
+                              Card(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      child: Column(
+                                        children: [
+                                          Text(e.data().name.toString()),
+                                          Text(e.data().description.toString()),
+                                          Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children:[
+                                                IconButton(
+                                                  onPressed: (){
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext context) {
+                                                        return AlertDialog(
+                                                          title: Text('Success'),
+                                                          content: Text('Product added to cart!'),
+                                                          actions: [
+                                                            TextButton(
+                                                              child: Text('OK'),
+                                                              onPressed: () {
+                                                                Navigator.of(context).pop();
+                                                              },
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  icon: Icon(Icons.shopping_cart),
+                                                  color: Colors.red,
+                                                ),
+                                              ]
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                        ),
+                      ],
                     ),
                   ),
-                  ],
                 ),
+              ],
+            ),
           );
         }
     ); }
 }
-

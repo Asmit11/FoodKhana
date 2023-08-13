@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodkhana/models/ProductModel.dart';
 
 
-
+// okay
 class CartModel {
 
   CartModel({required this.items, required this.user_id});
