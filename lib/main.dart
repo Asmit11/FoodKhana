@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:foodkhana/models/FeedbackModel.dart';
 import 'package:foodkhana/screens/AddToCard.dart';
 import 'package:foodkhana/screens/CustomerFeedback.dart';
@@ -13,11 +14,24 @@ import 'package:foodkhana/screens/PrintReceiptScreen.dart';
 import 'package:foodkhana/services/local_notification_service.dart';
 import 'package:foodkhana/viewmodels/auth_viewmodel.dart';
 import 'package:foodkhana/viewmodels/global_ui_viewmodel.dart';
+=======
+import 'package:foodkhana/BillingScreen.dart';
+import 'package:foodkhana/DashBoardScreen.dart';
+import 'package:foodkhana/ForgetScreen.dart';
+import 'package:foodkhana/LoginScreen.dart';
+import 'package:foodkhana/OrderStatusPage.dart';
+>>>>>>> d266eb9d0571a7e5f587797b8f123ca40156582a
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
 import 'package:foodkhana/screens/SplashScreen.dart';
 import 'package:provider/provider.dart';
+<<<<<<< HEAD
 import 'screens/BillingScreen.dart';
 import 'screens/RegisterScreen.dart';
+=======
+
+import 'RegisterScreen.dart';
+
+>>>>>>> d266eb9d0571a7e5f587797b8f123ca40156582a
 import 'firebase_options.dart';
 
 
@@ -51,7 +65,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ), //m
+<<<<<<< HEAD
       initialRoute: "/splash",
+=======
+      initialRoute: "/dashboard",
+>>>>>>> d266eb9d0571a7e5f587797b8f123ca40156582a
       routes: {
         "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
@@ -59,6 +77,7 @@ class MyApp extends StatelessWidget {
         "/dashboard": (context) => DashBoardScreen(),
         "/orderstatus": (context) => OrderStatusPage(),
         "/billing": (context) => BillingScreen(),
+<<<<<<< HEAD
         "/addtocart": (context) => AddToCart(),
         "/managerdashboard": (context) => ManagerDashboard(),
         "/printreceipt": (context) => PrintReceiptScreen(),
@@ -71,6 +90,8 @@ class MyApp extends StatelessWidget {
 
 
 
+=======
+>>>>>>> d266eb9d0571a7e5f587797b8f123ca40156582a
 
 
     ),
