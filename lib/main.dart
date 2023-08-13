@@ -6,16 +6,13 @@ import 'package:foodkhana/screens/AddToCard.dart';
 import 'package:foodkhana/screens/DashBoardScreen.dart';
 import 'package:foodkhana/screens/ForgetScreen.dart';
 import 'package:foodkhana/screens/LoginScreen.dart';
-import 'package:foodkhana/screens/update_password_screen.dart';
+import 'package:foodkhana/screens/UpdatePasswordScreen.dart';
 import 'package:foodkhana/screens/ManagerDashboard.dart';
 import 'package:foodkhana/screens/OrderStatusPage.dart';
 import 'package:foodkhana/services/local_notification_service.dart';
 import 'package:foodkhana/viewmodels/auth_viewmodel.dart';
 import 'package:foodkhana/viewmodels/global_ui_viewmodel.dart';
 import 'package:foodkhana/viewmodels/product_viewmodel.dart';
-import 'package:foodkhana/screens/edit_order_page.dart'; // Import the EditOrderPage
-import 'package:foodkhana/screens/order.dart'; // Import the Order class
-import 'package:foodkhana/screens/order_history_page.dart'; // Import the OrderHistoryPage
 import 'screens/BillingScreen.dart';
 import 'screens/RegisterScreen.dart';
 
@@ -47,7 +44,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.red,
         ),
-        initialRoute: "/editorder",
+        initialRoute: "/updatepassword",
         routes: {
           "/login": (context) => LoginScreen(),
           "/register": (context) => RegisterScreen(),
@@ -57,18 +54,10 @@ class MyApp extends StatelessWidget {
           "/billing": (context) => BillingScreen(),
           "/payment": (context) => PaymentScreen(totalAmount: 50.0),
           "/addtocart": (context) => AddToCart(),
-          "/orderhistory": (context) => OrderHistoryPage(),
           "/managerdashboard": (context) => ManagerDashboard(),
           '/split-bill': (context) => SplitBillScreen(splitAmount: 0.0),
           "/updatepassword": (context) => UpdatePasswordScreen(),
-          "/editorder": (context) => EditOrderPage(
-            order: Order(
-              id: '1', // Replace with the actual id
-              item: 'Example Item',
-              amount: 100.0,
-              date: DateTime.now(),
-            ),
-          ), // Use Order.example() to initialize
+         // Use Order.example() to initialize
         },
       ),
     );
