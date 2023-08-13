@@ -44,6 +44,17 @@ class AuthRepository{
     }
   }
 
+  Future<UserModel>getOneAuth(String id) async{
+    try{
+      final product = await userRef.doc(id).get();
+      return product.data()!;
+    }catch(e){
+      print(e);
+        rethrow;
+    }
+  }
+
+
   Future<UserModel> getUserDetail(String id) async {
     try {
       final response = await userRef
@@ -69,6 +80,16 @@ class AuthRepository{
       rethrow;
     }
   }
+
+  Future<dynamic>updateAuth(String id, UserModel data) async{
+    try{
+      await userRef.doc(id).set(data);
+    } catch(e){
+      rethrow;
+    }
+
+  }
+
 
 
   Future<void> logout() async {

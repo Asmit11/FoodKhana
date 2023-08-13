@@ -18,6 +18,14 @@ class _AddToCartState extends State<AddToCart> {
     getCartItems();
     super.initState();
   }
+<<<<<<< HEAD
+
+  void removeFromCart(Product product) {
+    items.removeWhere((item) => item.product.name == product.name);
+  }
+}
+=======
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
 
   Future<void> getCartItems() async {
     final response = await CartRepository().getCart();
@@ -26,8 +34,101 @@ class _AddToCartState extends State<AddToCart> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(onPressed: () {
+          Navigator.of(context).pushNamed("/dashboard");
+        },
+          icon: const Icon(Icons.arrow_back),),
+        title: Text('Add to Cart'),
+      ),
+      body: ListView.builder(
+        itemCount: products.length,
+        itemBuilder: (context, index) {
+          Product product = products[index];
+          return ListTile(
+            title: Text(product.name),
+            subtitle: Text('\$${product.price}'),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+
+                IconButton(
+                  icon: Icon(Icons.add_shopping_cart),
+                  onPressed: () {
+                    cart.addToCart(product);
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Success'),
+                          content: Text('Product added to cart!'),
+                          actions: [
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+
+                IconButton(
+                  icon: Icon(Icons.note_add_outlined),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed("/specialrequest");
+                    // Handle favorite button press
+                  },
+                ),
+
+                IconButton(
+                  icon: Icon(Icons.cancel),
+                  color: Colors.red,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Confirmation'),
+                          content: Text('Are you sure you want to cancel the order?'),
+                          actions: [
+                            ElevatedButton(
+                              child: Text('No'),
+                              onPressed: () {
+                                Navigator.of(context).pop(false);
+                              },
+                            ),
+
+                            ElevatedButton(
+                              child: Text('Yes'),
+                              onPressed: () {
+                                cart.removeFromCart(product); // Remove the product from the cart
+                                Navigator.of(context).pop(); // Close the dialog
+                                final snackBar = SnackBar(
+                                  content: Text('Your order has been cancelled successfully'),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          );
+        },
+=======
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -119,7 +220,20 @@ class _AddToCartState extends State<AddToCart> {
             ],
           ),
         ),
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
       ),
     );
   }
 }
+<<<<<<< HEAD
+
+
+
+void main() {
+  runApp(MaterialApp(
+    title: 'Add to Cart',
+    home: AddToCart(),
+  ));
+}
+=======
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c

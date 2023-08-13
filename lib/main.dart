@@ -9,8 +9,18 @@ import 'package:foodkhana/screens/EditFeedbackScreen.dart';
 import 'package:foodkhana/screens/ForgetScreen.dart';
 import 'package:foodkhana/screens/LoginScreen.dart';
 import 'package:foodkhana/screens/ManagerDashboard.dart';
+import 'package:foodkhana/screens/ManagerLoginScreen.dart';
 import 'package:foodkhana/screens/OrderStatusPage.dart';
+<<<<<<< HEAD
+import 'package:foodkhana/screens/Settings.dart';
+import 'package:foodkhana/screens/SpecialRequest.dart';
+import 'package:foodkhana/screens/StaffLogin.dart';
+import 'package:foodkhana/screens/UpdateProduct.dart';
+import 'package:foodkhana/screens/UpdateScreen.dart';
+import 'package:foodkhana/screens/ViewProfile.dart';
+=======
 import 'package:foodkhana/screens/PrintReceiptScreen.dart';
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
 import 'package:foodkhana/services/local_notification_service.dart';
 import 'package:foodkhana/viewmodels/auth_viewmodel.dart';
 import 'package:foodkhana/viewmodels/global_ui_viewmodel.dart';
@@ -66,10 +76,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ), //m
 <<<<<<< HEAD
+      initialRoute: "/dashboard",
+=======
+<<<<<<< HEAD
       initialRoute: "/splash",
 =======
       initialRoute: "/dashboard",
 >>>>>>> d266eb9d0571a7e5f587797b8f123ca40156582a
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
       routes: {
         "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
@@ -79,7 +93,17 @@ class MyApp extends StatelessWidget {
         "/billing": (context) => BillingScreen(),
 <<<<<<< HEAD
         "/addtocart": (context) => AddToCart(),
+        "/updateproduct": (context)=> UpdateProduct(),
         "/managerdashboard": (context) => ManagerDashboard(),
+<<<<<<< HEAD
+        "/specialrequest": (context) => SpecialRequest(),
+        "/managerlogin": (context) => ManagerLoginScreen(),
+        "/viewprofile": (context) => ViewProfile(),
+        "/updateprofile": (context) => UpdateScreen(),
+        "/settings": (context) => Settings(),
+        "/stafflogin": (context)=>StaffLoginScreen(),
+      },
+=======
         "/printreceipt": (context) => PrintReceiptScreen(),
         "/feedback": (context) => CustomerFeedback(),
         "/splash": (context)=> SplashScreen(),
@@ -94,6 +118,7 @@ class MyApp extends StatelessWidget {
 >>>>>>> d266eb9d0571a7e5f587797b8f123ca40156582a
 
 
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
     ),
     );
   }

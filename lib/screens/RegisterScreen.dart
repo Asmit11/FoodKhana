@@ -80,8 +80,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   Image.asset(
                     "assets/images/Foodkhanalogo.png",
+<<<<<<< HEAD
+                    height: 200,
+                    width: 200,
+=======
                     height: 100,
                     width: 100,
+>>>>>>> 36618c88e25aabc977219947477fb18728fcf31c
                   ),
                   SizedBox(height: 10,),
                   TextFormField(
