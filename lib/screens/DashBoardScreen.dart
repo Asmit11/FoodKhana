@@ -154,7 +154,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           title: Text('Switch to Manager'),
                           leading: Icon(Icons.switch_account),
                           onTap:(){
-                            Navigator.of(context).pushNamed("/managerdashboard");
+                            Navigator.of(context).pushNamed("/managerlogin");
                           },
                         ),
 
